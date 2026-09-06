@@ -1,0 +1,2035 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#F4EDE4"/><text x="50" y="58" font-size="34" text-anchor="middle" fill="#C97B5A">€</text></svg></template>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@600;700&family=Montserrat:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#F4EDE4;font-family:'Nunito',sans-serif;-webkit-font-smoothing:antialiased}
+  input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+  input{font-family:'Nunito',sans-serif}
+  a{color:#B35F3D}a:hover{color:#8f4a30}
+  @keyframes blinkAlert{0%,100%{opacity:1}50%{opacity:0.4}}
+</style>
+</helmet>
+
+<sc-if value="{{!hasUserName}}" hint-placeholder-val="{{true}}">
+  <div style="{{gateWrapStyle}}">
+    <div style="{{gateCardStyle}}">
+      <div style="{{gateTitleStyle}}">Bienvenue</div>
+      <div style="{{gateSubtitleStyle}}">{{onboardingSubtitle}}</div>
+      <div style="{{onboardingDotsWrapStyle}}">
+        <sc-for list="{{onboardingDots}}" as="dot" hint-placeholder-count="4">
+          <div style="{{dot.style}}"></div>
+        </sc-for>
+      </div>
+
+      <sc-if value="{{isStep0}}" hint-placeholder-val="{{true}}">
+        <div style="{{gateFormStyle}}">
+          <input type="text" placeholder="Prénom" value="{{firstNameInput}}" onChange="{{onFirstNameChange}}" onKeyDown="{{onOnboardingEnter}}" style="{{gateInputStyle}}"/>
+          <input type="text" placeholder="Nom" value="{{lastNameInput}}" onChange="{{onLastNameChange}}" onKeyDown="{{onOnboardingEnter}}" style="{{gateInputStyle}}"/>
+          <input type="email" placeholder="Adresse mail" value="{{emailInput}}" onChange="{{onEmailChange}}" onKeyDown="{{onOnboardingEnter}}" style="{{gateInputStyle}}"/>
+          <input type="number" inputMode="numeric" placeholder="Ton âge" value="{{ageInput}}" onChange="{{onAgeChange}}" onKeyDown="{{onOnboardingEnter}}" style="{{gateInputStyle}}"/>
+        </div>
+      </sc-if>
+      <sc-if value="{{isStep1}}" hint-placeholder-val="{{false}}">
+        <div style="{{choiceListStyle}}">
+          <sc-for list="{{goalOptions}}" as="opt" hint-placeholder-count="4">
+            <button onClick="{{opt.onPick}}" style="{{opt.style}}" style-hover="transform: scale(1.02); background: #C97B5A; color: #fff;" style-active="transform: scale(0.96); opacity: 0.8;">{{opt.label}}</button>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{isStep2}}" hint-placeholder-val="{{false}}">
+        <div style="{{choiceListStyle}}">
+          <sc-for list="{{situationProOptions}}" as="opt" hint-placeholder-count="4">
+            <button onClick="{{opt.onPick}}" style="{{opt.style}}" style-hover="transform: scale(1.02); background: #C97B5A; color: #fff;" style-active="transform: scale(0.96); opacity: 0.8;">{{opt.label}}</button>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{isStep3}}" hint-placeholder-val="{{false}}">
+        <div style="{{choiceListStyle}}">
+          <sc-for list="{{situationPersoOptions}}" as="opt" hint-placeholder-count="4">
+            <button onClick="{{opt.onPick}}" style="{{opt.style}}" style-hover="transform: scale(1.02); background: #C97B5A; color: #fff;" style-active="transform: scale(0.96); opacity: 0.8;">{{opt.label}}</button>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{isStep4}}" hint-placeholder-val="{{false}}">
+        <div style="{{choiceListStyle}}">
+          <sc-for list="{{hasKidsOptions}}" as="opt" hint-placeholder-count="2">
+            <button onClick="{{opt.onPick}}" style="{{opt.style}}" style-hover="transform: scale(1.02); background: #C97B5A; color: #fff;" style-active="transform: scale(0.96); opacity: 0.8;">{{opt.label}}</button>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{isStep5}}" hint-placeholder-val="{{false}}">
+        <div style="{{paymentCardStyle}}">
+          <div style="{{paymentPriceStyle}}">0,99 € <span style="{{paymentPeriodStyle}}">/ mois</span></div>
+          <div style="{{paymentNoteStyle}}">Accès illimité à ton suivi de budget. Résiliable à tout moment.</div>
+        </div>
+      </sc-if>
+
+      <div style="{{gateNavRowStyle}}">
+        <sc-if value="{{!isStep0}}" hint-placeholder-val="{{false}}">
+          <button onClick="{{onboardingBack}}" style="{{gateBackStyle}}" style-hover="transform: scale(1.04); opacity: 0.7;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">‹ Retour</button>
+        </sc-if>
+        <sc-if value="{{!isStep1}}" hint-placeholder-val="{{true}}">
+        <sc-if value="{{!isStep2}}" hint-placeholder-val="{{true}}">
+        <sc-if value="{{!isStep3}}" hint-placeholder-val="{{true}}">
+        <sc-if value="{{!isStep4}}" hint-placeholder-val="{{true}}">
+          <button onClick="{{onboardingNext}}" style="{{gateSubmitStyle}}" style-hover="transform: scale(1.04); opacity: 0.85;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">{{onboardingNextLabel}}</button>
+        </sc-if>
+        </sc-if>
+        </sc-if>
+        </sc-if>
+      </div>
+      <sc-if value="{{isStep5}}" hint-placeholder-val="{{false}}">
+        <button onClick="{{skipToFree}}" style="{{gateFreeLinkStyle}}" style-hover="transform: scale(1.03); opacity: 0.7;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">Continuer avec la version gratuite</button>
+      </sc-if>
+      <button onClick="{{togglePrivacy}}" style="{{privacyLinkStyle}}" style-hover="opacity: 0.7;">Politique de confidentialité</button>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{hasUserName}}" hint-placeholder-val="{{false}}">
+<sc-if value="{{splashVisible}}" hint-placeholder-val="{{false}}">
+  <div style="{{splashOverlayStyle}}">
+    <div style="{{splashQuoteStyle}}">{{splashQuote}}</div>
+  </div>
+</sc-if>
+<div style="min-height:100vh;box-sizing:border-box;padding:24px 20px 40px;max-width:1240px;margin:0 auto">
+
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:22px">
+    <div>
+      <div style="{{eyebrowStyle}}">MON BUDGET</div>
+      <div style="{{greetingStyle}}">{{greetingText}}</div>
+      <div style="{{subtitleStyle}}">Suivi mensuel prévu vs réel</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="{{monthNavStyle}}">
+        <button onClick="{{prevMonth}}" style="{{navBtnStyle}}" style-hover="transform: scale(1.2); opacity: 0.7;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">‹</button>
+        <div style="{{monthLabelStyle}}">{{monthLabel}}</div>
+        <button onClick="{{nextMonth}}" style="{{navBtnStyle}}" style-hover="transform: scale(1.2); opacity: 0.7;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">›</button>
+      </div>
+      <button onClick="{{onDiaryClick}}" style="{{historyButtonStyle}}" style-hover="transform: scale(1.05); background: #C97B5A; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">{{diaryButtonLabel}}</button>
+      <button onClick="{{onHistoryClick}}" style="{{historyButtonStyle}}" style-hover="transform: scale(1.05); background: #C97B5A; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">{{historyButtonLabel}}</button>
+      <sc-if value="{{canExport}}" hint-placeholder-val="{{true}}">
+        <button onClick="{{onExportClick}}" style="{{historyButtonStyle}}" style-hover="transform: scale(1.05); background: #5D7A56; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">⇪ Exporter</button>
+      </sc-if>
+      <sc-if value="{{isSubscribed}}" hint-placeholder-val="{{true}}">
+        <button onClick="{{onMicClick}}" style="{{micButtonStyle}}" style-hover="transform: scale(1.15); background: #C97B5A; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">
+          <sc-if value="{{!micListening}}" hint-placeholder-val="{{true}}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+          </sc-if>
+          <sc-if value="{{micListening}}" hint-placeholder-val="{{false}}">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="5" width="14" height="14" rx="2"></rect></svg>
+          </sc-if>
+        </button>
+      </sc-if>
+      <button onClick="{{toggleDarkMode}}" style="{{darkToggleStyle}}" style-hover="transform: scale(1.15); background: #C97B5A; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">{{darkToggleLabel}}</button>
+    </div>
+  </div>
+
+  <sc-if value="{{upgradeOpen}}" hint-placeholder-val="{{false}}">
+    <div style="{{upgradeBackdropStyle}}" onClick="{{closeUpgrade}}">
+      <div style="{{upgradeModalStyle}}" onClick="{{stopPropagation}}">
+        <div style="{{historyTitleStyle}}">Passe à l'abonnement</div>
+        <div style="{{paymentCardStyle}}">
+          <div style="{{paymentPriceStyle}}">0,99 € <span style="{{paymentPeriodStyle}}">/ mois</span></div>
+          <div style="{{paymentNoteStyle}}">Accès illimité à ton suivi de budget. Résiliable à tout moment.</div>
+        </div>
+        <button onClick="{{subscribeNow}}" style="{{gateSubmitStyle}}" style-hover="transform: scale(1.04); opacity: 0.85;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">S'abonner</button>
+        <button onClick="{{closeUpgrade}}" style="{{gateFreeLinkStyle}}" style-hover="transform: scale(1.03); opacity: 0.7;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">Plus tard</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{privacyOpen}}" hint-placeholder-val="{{false}}">
+    <div style="{{historyBackdropStyle}}" onClick="{{togglePrivacy}}">
+      <div style="{{privacyModalStyle}}" onClick="{{stopPropagation}}">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <div style="{{historyTitleStyle}}">🔒 Politique de confidentialité</div>
+          <button onClick="{{togglePrivacy}}" style="{{navBtnStyle}}" style-hover="transform: scale(1.15); background: #C97B5A; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">✕</button>
+        </div>
+        <div style="{{privacyTextStyle}}">
+          <p><strong>Tes données restent sur ton appareil.</strong> Ton budget, tes catégories, ton journal et tes préférences sont stockés localement dans ton navigateur (localStorage) — nous n'avons pas de serveur qui les héberge.</p>
+          <p><strong>Inscription.</strong> Lors de la création de ton compte, ton prénom, nom, email, profession et âge sont transmis à une feuille de calcul sécurisée, uniquement pour le suivi des inscriptions. Ces informations ne sont jamais revendues ni partagées avec des tiers.</p>
+          <p><strong>Aucun suivi publicitaire.</strong> L'application ne contient ni traqueurs, ni cookies publicitaires, ni revente de données comportementales.</p>
+          <p><strong>Suppression.</strong> Tu peux effacer toutes tes données à tout moment en vidant le stockage local de ton navigateur pour cette page.</p>
+          <p><strong>Contact.</strong> Pour toute question sur tes données, contacte-nous à l'adresse indiquée lors de ton inscription.</p>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{diaryOpen}}" hint-placeholder-val="{{false}}">
+    <div style="{{historyBackdropStyle}}" onClick="{{toggleDiary}}">
+      <div style="{{diaryModalStyle}}" onClick="{{stopPropagation}}">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div style="{{historyTitleStyle}}">📔 Journal de bord</div>
+          <button onClick="{{toggleDiary}}" style="{{navBtnStyle}}" style-hover="transform: scale(1.15); background: #C97B5A; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">✕</button>
+        </div>
+        <sc-if value="{{!isSubscribed}}" hint-placeholder-val="{{false}}">
+          <div style="{{lockPreviewWrapStyle}}">
+            <div style="{{moodRowStyle}}">
+              <sc-for list="{{moodOptions}}" as="mood" hint-placeholder-count="3">
+                <div style="{{mood.previewSwatchStyle}}">{{mood.label}}</div>
+              </sc-for>
+            </div>
+            <div style="{{diaryTextareaStyle}}">Aujourd'hui je me sens motivé, j'ai réussi à mettre de l'argent de côté...</div>
+          </div>
+          <div style="font:600 13px 'Nunito',sans-serif;margin-top:10px;color:{{mutedColor}}">Écris librement chaque mois ce que tu ressens, associe une couleur d'humeur, et retrouve toutes tes notes passées.</div>
+          <div style="{{lockedPlaceholderStyle}}" onClick="{{openUpgrade}}">🔒 Débloque le journal avec l'abonnement (0,99 €/mois)</div>
+        </sc-if>
+        <sc-if value="{{isSubscribed}}" hint-placeholder-val="{{true}}">
+        <sc-if value="{{!isViewingPastDiary}}" hint-placeholder-val="{{true}}">
+          <div style="{{diarySubtitleStyle}}">{{monthLabel}} — écris ce que tu ressens, ce qui te motive ou te pèse ce mois-ci.</div>
+          <div style="{{moodRowStyle}}">
+            <sc-for list="{{moodOptions}}" as="mood" hint-placeholder-count="3">
+              <button onClick="{{mood.onSelect}}" style="{{mood.swatchStyle}}" style-hover="transform: scale(1.1); opacity: 0.85;">{{mood.label}}</button>
+            </sc-for>
+          </div>
+          <textarea value="{{diaryText}}" onChange="{{onDiaryTextChange}}" placeholder="Aujourd'hui je me sens..." style="{{diaryTextareaStyle}}"></textarea>
+          <div style="{{saveDiaryRowStyle}}">
+            <button onClick="{{onSaveDiary}}" style="{{saveDiaryBtnStyle}}" style-hover="transform: scale(1.02); opacity: 0.85;" style-active="transform: scale(0.92); opacity: 0.7;">✓ C'est noté</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{isViewingPastDiary}}" hint-placeholder-val="{{false}}">
+          <div style="{{diarySubtitleStyle}}">{{diaryViewLabel}} — lecture seule, ce mois est écoulé.</div>
+          <div style="{{diaryViewBoxStyle}}">{{diaryViewText}}</div>
+          <div style="{{saveDiaryRowStyle}}">
+            <button onClick="{{onCloseDiaryView}}" style="{{saveDiaryBtnStyle}}" style-hover="transform: scale(1.02); opacity: 0.85;" style-active="transform: scale(0.92); opacity: 0.7;">← Retour au mois en cours</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{hasDiaryHistory}}" hint-placeholder-val="{{false}}">
+          <div style="{{diaryHistoryTitleStyle}}">Notes précédentes</div>
+          <input type="text" placeholder="Rechercher un mois ou une année (ex: juillet, 2026)" value="{{diarySearch}}" onChange="{{onDiarySearchChange}}" style="{{diarySearchStyle}}"/>
+          <sc-if value="{{noDiarySearchResults}}" hint-placeholder-val="{{false}}">
+            <div style="{{diarySubtitleStyle}}">Aucune note ne correspond à "{{diarySearch}}".</div>
+          </sc-if>
+          <div style="{{diaryHistoryListStyle}}">
+            <sc-for list="{{filteredDiaryHistoryRows}}" as="dh" hint-placeholder-count="2">
+              <div onClick="{{dh.onOpen}}" style="{{dh.rowStyle}}" style-hover="opacity: 0.7; transform: scale(1.01);">
+                <span style="{{dh.dotStyle}}"></span>
+                <div style="{{dh.labelStyle}}">{{dh.monthLabel}}</div>
+                <div style="{{dh.snippetStyle}}">{{dh.snippet}}</div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{historyOpen}}" hint-placeholder-val="{{false}}">
+    <div style="{{historyBackdropStyle}}" onClick="{{toggleHistory}}">
+      <div style="{{historyModalStyle}}" onClick="{{stopPropagation}}">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <div style="{{historyTitleStyle}}">Historique annuel</div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <sc-if value="{{isSubscribed}}" hint-placeholder-val="{{true}}">
+              <button onClick="{{onOpenYearCalendar}}" style="{{yearCalOpenBtnStyle}}" style-hover="transform: scale(1.04); background: #B35F3D;" style-active="transform: scale(0.95); opacity: 0.7;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M8 3v4M16 3v4M3 10h18"></path></svg>
+                Vue calendrier
+              </button>
+            </sc-if>
+            <button onClick="{{toggleHistory}}" style="{{navBtnStyle}}" style-hover="transform: scale(1.15); background: #C97B5A; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">✕</button>
+          </div>
+        </div>
+        <sc-if value="{{!isSubscribed}}" hint-placeholder-val="{{false}}">
+          <div style="{{lockPreviewWrapStyle}}">
+            <div style="{{historyHeaderRowStyle}}">
+              <div>Mois</div><div style="text-align:right">Revenus</div><div style="text-align:right">Dépenses</div><div style="text-align:right">Épargne</div>
+            </div>
+            <div style="{{historyPreviewRowStyle}}"><div>Août 2026</div><div style="text-align:right">2 200 €</div><div style="text-align:right">1 950 €</div><div style="text-align:right">+ 250 €</div></div>
+            <div style="{{historyPreviewRowStyle}}"><div>Juillet 2026</div><div style="text-align:right">2 200 €</div><div style="text-align:right">2 100 €</div><div style="text-align:right">+ 100 €</div></div>
+          </div>
+          <div style="font:600 13px 'Nunito',sans-serif;margin-top:10px;color:{{mutedColor}}">Retrouve chaque mois écoulé — revenus, dépenses, épargne — avec le détail complet de tes catégories.</div>
+          <div style="{{lockedPlaceholderStyle}}">🔒 Débloque l'historique avec l'abonnement (0,99 €/mois)</div>
+        </sc-if>
+        <sc-if value="{{isSubscribed}}" hint-placeholder-val="{{true}}">
+        <sc-if value="{{hasHistoryRows}}" hint-placeholder-val="{{false}}">
+          <div style="{{historySearchWrapStyle}}">
+            <span style="{{historySearchIconStyle}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M8 3v4M16 3v4M3 10h18"></path></svg></span>
+            <input type="text" placeholder="Rechercher un mois ou une année (ex: juillet, 2026)" value="{{historySearch}}" onChange="{{onHistorySearchChange}}" style="{{historySearchStyle}}"/>
+          </div>
+        </sc-if>
+        <sc-if value="{{hasHistoryRows}}" hint-placeholder-val="{{false}}">
+          <div style="{{historyHeaderRowStyle}}">
+            <div>Mois</div><div style="text-align:right">Revenus</div><div style="text-align:right">Dépenses</div><div style="text-align:right">Épargne</div>
+          </div>
+          <sc-if value="{{noSearchResults}}" hint-placeholder-val="{{false}}">
+            <div style="{{placeholderTextStyle}}">Aucun mois ne correspond à "{{historySearch}}".</div>
+          </sc-if>
+          <sc-for list="{{filteredHistoryRows}}" as="hr" hint-placeholder-count="3">
+            <div>
+              <div onClick="{{hr.onToggleDetail}}" style="{{hr.rowStyle}}" style-hover="opacity: 0.7; transform: scale(1.015);">
+                <div style="{{hr.labelStyle}}">{{hr.monthLabel}} <span style="{{hr.chevronStyle}}">{{hr.chevron}}</span></div>
+                <div style="{{hr.amountStyle}}">{{hr.revenusFmt}}</div>
+                <div style="{{hr.amountStyle}}">{{hr.depensesFmt}}</div>
+                <div style="{{hr.resultStyle}}">{{hr.resultFmt}}</div>
+              </div>
+              <sc-if value="{{hr.isExpanded}}" hint-placeholder-val="{{false}}">
+                <div style="{{hr.detailBoxStyle}}">
+                  <sc-for list="{{hr.detailCategories}}" as="dc" hint-placeholder-count="4">
+                    <div style="{{dc.sectionStyle}}">
+                      <div style="{{dc.sectionTitleStyle}}">{{dc.label}}<span style="{{dc.sectionTotalStyle}}">Prévu {{dc.totalPrevuFmt}} · Réel {{dc.totalReelFmt}}</span></div>
+                      <sc-if value="{{dc.isEmpty}}" hint-placeholder-val="{{false}}">
+                        <div style="{{dc.emptyLineStyle}}">Aucune ligne</div>
+                      </sc-if>
+                      <sc-for list="{{dc.lines}}" as="dl" hint-placeholder-count="2">
+                        <div style="{{dl.lineRowStyle}}">
+                          <div style="{{dl.labelStyle}}">{{dl.label}}</div>
+                          <div style="{{dl.dateStyle}}">{{dl.dateFmt}}</div>
+                          <div style="{{dl.amountStyle}}">{{dl.prevuFmt}}</div>
+                          <div style="{{dl.amountStyle}}">{{dl.reelFmt}}</div>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </sc-if>
+        <sc-if value="{{!hasHistoryRows}}" hint-placeholder-val="{{true}}">
+          <div style="{{placeholderTextStyle}}">Pas encore d'historique — revenez le mois prochain.</div>
+        </sc-if>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{yearCalendarOpen}}" hint-placeholder-val="{{false}}">
+    <div style="{{historyBackdropStyle}}" onClick="{{onCloseYearCalendar}}">
+      <div style="{{yearCalModalStyle}}" onClick="{{stopPropagation}}">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <button onClick="{{onYearCalPrev}}" style="{{navBtnStyle}}" style-hover="transform: scale(1.15); background: #C97B5A; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6;">‹</button>
+            <div style="{{historyTitleStyle}}">{{yearCalLabel}}</div>
+            <button onClick="{{onYearCalNext}}" style="{{navBtnStyle}}" style-hover="transform: scale(1.15); background: #C97B5A; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6;">›</button>
+          </div>
+          <button onClick="{{onCloseYearCalendar}}" style="{{yearCalCloseBtnStyle}}" style-hover="transform: scale(1.15); background: #C97B5A; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6;">✕</button>
+        </div>
+        <sc-if value="{{hasSelectedDay}}" hint-placeholder-val="{{false}}">
+          <div style="{{selectedDaySpendStyle}}">
+            <div style="{{selectedDaySpendTitleStyle}}">{{selectedDayTitle}}</div>
+            <sc-if value="{{selectedDayHasItems}}" hint-placeholder-val="{{false}}">
+              <sc-for list="{{selectedDayItems}}" as="it" hint-placeholder-count="2">
+                <div style="{{selectedDaySpendItemStyle}}"><span>{{it.label}}</span><span>{{it.amountFmt}}</span></div>
+              </sc-for>
+            </sc-if>
+            <sc-if value="{{!selectedDayHasItems}}" hint-placeholder-val="{{true}}">
+              <div style="{{selectedDaySpendEmptyStyle}}">Aucune dépense enregistrée ce jour-là.</div>
+            </sc-if>
+          </div>
+        </sc-if>
+        <div style="{{yearCalGridStyle}}">
+          <sc-for list="{{yearCalMonths}}" as="ym" hint-placeholder-count="12">
+            <div style="{{yearCalCardStyle}}">
+              <div style="{{ym.monthLabelStyle}}">{{ym.label}}</div>
+              <div style="{{yearCalWeekdaysStyle}}">
+                <div>L</div><div>M</div><div>M</div><div>J</div><div>V</div><div>S</div><div>D</div>
+              </div>
+              <div style="{{yearCalDaysGridStyle}}">
+                <sc-for list="{{ym.days}}" as="yd" hint-placeholder-count="30">
+                  <button onClick="{{yd.onSelect}}" style="{{yd.dayStyle}}" style-hover="transform: scale(1.15);">{{yd.label}}</button>
+                </sc-for>
+              </div>
+              <sc-if value="{{ym.hasSummary}}" hint-placeholder-val="{{false}}">
+                <div style="{{ym.summaryStyle}}"><span>Dép. {{ym.expensesFmt}}</span><span>Épar. {{ym.epargneFmt}}</span></div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+    <div style="background:#E8C4B0;border-radius:16px;padding:16px 20px;margin-bottom:20px;color:#5C4433;font:600 14px 'Nunito',sans-serif">
+      👉 Ajoute tes premières rentrées d'argent pour commencer.
+    </div>
+  </sc-if>
+
+  <div style="{{ '' }}display:flex;gap:24px;align-items:flex-start" style="{{layoutStyle}}">
+    <div style="flex:1 1 480px;min-width:0;display:flex;flex-direction:column;gap:18px;padding-bottom:{{bottomPad}}px">
+
+      <sc-for list="{{categoriesData}}" as="cat" hint-placeholder-count="4">
+        <div draggable="false" style="{{cat.cardStyle}}">
+          <sc-if value="{{cat.isPremiumLocked}}" hint-placeholder-val="{{false}}">
+            <div onClick="{{cat.onUnlockClick}}" style="{{lockOverlayStyle}}">
+              <div style="{{lockOverlayInnerStyle}}" style-hover="transform: scale(1.06); filter: brightness(1.1);" style-active="transform: scale(0.94); opacity: 0.8;">🔒 Débloque cette section avec l'abonnement (0,99 €/mois)</div>
+            </div>
+          </sc-if>
+          <div style="margin-bottom:12px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <div draggable="false" style="display:flex;align-items:center;gap:6px">
+                <span style="{{dragDotStyle}}">⋮⋮</span>
+                <div style="display:flex;flex-direction:column;gap:0px">
+                  <button onClick="{{cat.onMoveCatUp}}" style="{{cat.catMoveUpStyle}}" style-hover="transform: scale(1.3); color: #C97B5A;">▲</button>
+                  <button onClick="{{cat.onMoveCatDown}}" style="{{cat.catMoveDownStyle}}" style-hover="transform: scale(1.3); color: #C97B5A;">▼</button>
+                </div>
+              </div>
+              <sc-if value="{{cat.isCustom}}" hint-placeholder-val="{{false}}">
+                <input type="text" value="{{cat.label}}" onChange="{{cat.onLabelChange}}" style="{{cat.catTitleInputStyle}}"/>
+                <button onClick="{{cat.onRemoveCategory}}" style="{{removeButtonStyle}}" style-hover="transform: scale(1.25); background: #B35F3D; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">×</button>
+              </sc-if>
+              <sc-if value="{{!cat.isCustom}}" hint-placeholder-val="{{true}}">
+                <div style="font:700 16px 'Quicksand',sans-serif;color:{{textColor}}">{{cat.label}}</div>
+              </sc-if>
+            </div>
+            <sc-if value="{{cat.isDisabled}}" hint-placeholder-val="{{false}}">
+              <div style="{{disabledNoteStyle}}">Tes revenus ne couvrent pas tes charges — l'épargne n'est pas prise en compte ce mois-ci.</div>
+            </sc-if>
+            <sc-if value="{{!cat.isDebt}}" hint-placeholder-val="{{true}}">
+              <div style="font:600 13px 'Nunito',sans-serif;color:{{mutedColor}};margin-top:2px">
+                Prévu {{cat.totalPrevuFmt}} · Réel {{cat.totalReelFmt}} · <span style="{{cat.ecartStyle}}"><sc-if value="{{cat.ecartUp}}" hint-placeholder-val="{{false}}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="vertical-align:-1px"><path d="M2 18l7-7 4 4 9-10" stroke="#5D7A56" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M16 5h6v6" stroke="#5D7A56" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg></sc-if><sc-if value="{{cat.ecartDown}}" hint-placeholder-val="{{false}}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="vertical-align:-1px"><path d="M2 6l7 7 4-4 9 10" stroke="#B3452F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M16 19h6v-6" stroke="#B3452F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg></sc-if> {{cat.ecartAmountFmt}}</span>
+              </div>
+            </sc-if>
+            <sc-if value="{{cat.isDebt}}" hint-placeholder-val="{{false}}">
+              <div style="font:600 13px 'Nunito',sans-serif;color:{{mutedColor}};margin-top:2px">Total emprunté {{cat.totalDebtFmt}} · Mensualité {{cat.totalPrevuFmt}} · Reste {{cat.totalResteFmt}}</div>
+            </sc-if>
+          </div>
+
+          <div style="{{cat.lockedBodyStyle}}">
+          <sc-if value="{{cat.isEmpty}}" hint-placeholder-val="{{false}}">
+            <div style="{{emptyTextStyle}}">{{cat.emptyText}}</div>
+          </sc-if>
+
+          <sc-if value="{{!cat.isEmpty}}" hint-placeholder-val="{{true}}">
+            <sc-if value="{{cat.isDebt}}" hint-placeholder-val="{{false}}">
+              <div style="{{debtColHeaderStyle}}">
+                <div></div><div>Intitulé</div><div style="text-align:right">Total emprunté</div><div style="text-align:right">Mensualité</div><div style="text-align:right">Reste à terme</div><div style="text-align:right">Fin prévue</div><div></div>
+              </div>
+            </sc-if>
+            <sc-if value="{{!cat.isDebt}}" hint-placeholder-val="{{true}}">
+              <div style="{{colHeaderStyle}}">
+                <div></div><div>Intitulé</div><div style="text-align:center">Date</div><div style="text-align:right">Prévu</div><div style="text-align:right">Réel</div><div style="text-align:right">Écart</div><div></div>
+              </div>
+            </sc-if>
+          </sc-if>
+          <sc-for list="{{cat.lines}}" as="line" hint-placeholder-count="2">
+            <sc-if value="{{cat.isDebt}}" hint-placeholder-val="{{false}}">
+              <div draggable="false" onDragOver="{{line.onDragOver}}" onDrop="{{line.onDrop}}" style="{{line.rowDragStyle}}">
+                <div draggable="{{line.draggableLine}}" onDragStart="{{line.onDragStart}}" onDragEnd="{{line.onDragEnd}}" style="display:flex;align-items:center;gap:4px;cursor:grab">
+                  <span style="{{dragDotStyle}}">⋮⋮</span>
+                  <div style="display:flex;flex-direction:column;gap:1px">
+                    <button onClick="{{line.onMoveUp}}" disabled="{{line.isFirst}}" style="{{line.moveUpStyle}}" style-hover="transform: scale(1.3); color: #C97B5A;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">▲</button>
+                    <button onClick="{{line.onMoveDown}}" disabled="{{line.isLast}}" style="{{line.moveDownStyle}}" style-hover="transform: scale(1.3); color: #C97B5A;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">▼</button>
+                  </div>
+                </div>
+                <input type="text" placeholder="Intitulé" value="{{line.label}}" onChange="{{line.onLabel}}" style="{{labelInputStyle}}"/>
+                <input type="text" inputMode="decimal" placeholder="0" value="{{line.totalDisplay}}" onChange="{{line.onTotal}}" onBlur="{{line.onTotalBlur}}" onKeyDown="{{line.onAmountEnter}}" style="{{amountInputStyle}}"/>
+                <input type="text" inputMode="decimal" placeholder="0" value="{{line.prevuDisplay}}" onChange="{{line.onPrevu}}" onBlur="{{line.onPrevuBlur}}" onKeyDown="{{line.onAmountEnter}}" style="{{amountInputStyle}}"/>
+                <div style="{{line.resteAtermeStyle}}">{{line.resteAtermeFmt}}</div>
+                <div style="{{line.finPrevueStyle}}">{{line.finPrevueFmt}}</div>
+                <button onClick="{{line.onRemove}}" style="{{removeButtonStyle}}" style-hover="transform: scale(1.25); background: #B35F3D; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">×</button>
+              </div>
+            </sc-if>
+            <sc-if value="{{!cat.isDebt}}" hint-placeholder-val="{{true}}">
+              <div draggable="false" onDragOver="{{line.onDragOver}}" onDrop="{{line.onDrop}}" style="{{line.rowDragStyle}}">
+                <div draggable="{{line.draggableLine}}" onDragStart="{{line.onDragStart}}" onDragEnd="{{line.onDragEnd}}" style="display:flex;align-items:center;gap:4px;cursor:grab">
+                  <span style="{{dragDotStyle}}">⋮⋮</span>
+                  <div style="display:flex;flex-direction:column;gap:1px">
+                    <button onClick="{{line.onMoveUp}}" disabled="{{line.isFirst}}" style="{{line.moveUpStyle}}" style-hover="transform: scale(1.3); color: #C97B5A;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">▲</button>
+                    <button onClick="{{line.onMoveDown}}" disabled="{{line.isLast}}" style="{{line.moveDownStyle}}" style-hover="transform: scale(1.3); color: #C97B5A;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">▼</button>
+                  </div>
+                </div>
+                <input type="text" placeholder="Intitulé" value="{{line.label}}" onChange="{{line.onLabel}}" style="{{labelInputStyle}}"/>
+                <div style="position:relative">
+                  <button onClick="{{line.onOpenDatePicker}}" style="{{dateInputStyle}}">{{line.dateDisplay}}</button>
+                  <sc-if value="{{line.datePickerOpen}}" hint-placeholder-val="{{false}}">
+                    <div style="{{calendarPopoverStyle}}">
+                      <div style="{{calendarHeaderStyle}}">
+                        <button onClick="{{line.onCalPrevMonth}}" style="{{calendarNavBtnStyle}}">‹</button>
+                        <div style="{{calendarMonthLabelStyle}}">{{line.calMonthLabel}}</div>
+                        <button onClick="{{line.onCalNextMonth}}" style="{{calendarNavBtnStyle}}">›</button>
+                      </div>
+                      <div style="{{calendarWeekdaysStyle}}">
+                        <div>L</div><div>M</div><div>M</div><div>J</div><div>V</div><div>S</div><div>D</div>
+                      </div>
+                      <div style="{{calendarGridStyle}}">
+                        <sc-for list="{{line.calDays}}" as="cd" hint-placeholder-count="35">
+                          <button onClick="{{cd.onSelect}}" style="{{cd.dayStyle}}" style-hover="transform: scale(1.1); background: #C97B5A; color: #fff;">{{cd.label}}</button>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </sc-if>
+                </div>
+                <input type="text" inputMode="decimal" placeholder="0" value="{{line.prevuDisplay}}" onChange="{{line.onPrevu}}" onBlur="{{line.onPrevuBlur}}" onKeyDown="{{line.onAmountEnter}}" style="{{amountInputStyle}}"/>
+                <input type="text" inputMode="decimal" placeholder="0" value="{{line.reelDisplay}}" onChange="{{line.onReel}}" onBlur="{{line.onReelBlur}}" onKeyDown="{{line.onAmountEnter}}" style="{{amountInputStyle}}"/>
+                <div style="{{line.lineEcartStyle}}">
+                  <sc-if value="{{line.ecartUp}}" hint-placeholder-val="{{false}}">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="flex:0 0 auto"><path d="M2 18l7-7 4 4 9-10" stroke="#5D7A56" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M16 5h6v6" stroke="#5D7A56" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+                  </sc-if>
+                  <sc-if value="{{line.ecartDown}}" hint-placeholder-val="{{false}}">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="flex:0 0 auto"><path d="M2 6l7 7 4-4 9 10" stroke="#B3452F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M16 19h6v-6" stroke="#B3452F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+                  </sc-if>
+                  {{line.ecartAmountFmt}}
+                </div>
+                <button onClick="{{line.onRemove}}" style="{{removeButtonStyle}}" style-hover="transform: scale(1.25); background: #B35F3D; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">×</button>
+              </div>
+            </sc-if>
+          </sc-for>
+
+          <sc-if value="{{!cat.isEmpty}}" hint-placeholder-val="{{true}}">
+            <sc-if value="{{cat.isDebt}}" hint-placeholder-val="{{false}}">
+              <div style="{{cat.totalRowStyle}}">
+                <div></div>
+                <div>Total</div>
+                <div style="text-align:right">{{cat.totalDebtFmt}}</div>
+                <div style="text-align:right">{{cat.totalPrevuFmt}}</div>
+                <div style="text-align:right;{{cat.ecartRowValueStyle}}">{{cat.totalResteFmt}}</div>
+                <div></div>
+                <div></div>
+              </div>
+            </sc-if>
+            <sc-if value="{{!cat.isDebt}}" hint-placeholder-val="{{true}}">
+              <div style="{{cat.totalRowStyle}}">
+                <div></div>
+                <div>Total</div>
+                <div></div>
+                <div style="text-align:right">{{cat.totalPrevuFmt}}</div>
+                <div style="text-align:right">{{cat.totalReelFmt}}</div>
+                <div style="text-align:right;{{cat.ecartRowValueStyle}};display:flex;align-items:center;justify-content:flex-end;gap:3px">
+                  <sc-if value="{{cat.ecartUp}}" hint-placeholder-val="{{false}}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="flex:0 0 auto"><path d="M2 18l7-7 4 4 9-10" stroke="#5D7A56" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M16 5h6v6" stroke="#5D7A56" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg></sc-if>
+                  <sc-if value="{{cat.ecartDown}}" hint-placeholder-val="{{false}}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="flex:0 0 auto"><path d="M2 6l7 7 4-4 9 10" stroke="#B3452F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M16 19h6v-6" stroke="#B3452F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg></sc-if>
+                  {{cat.ecartAmountFmt}}
+                </div>
+                <div></div>
+              </div>
+            </sc-if>
+            <div style="{{resteRowStyle}}">{{resteLabel}}</div>
+          </sc-if>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+            <button onClick="{{cat.onAddOrUpgrade}}" style="{{addLineButtonStyle}}" style-hover="transform: scale(1.04); background: #C97B5A; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">+ Ajouter une ligne</button>
+            <sc-if value="{{isSubscribed}}" hint-placeholder-val="{{true}}">
+              <button onClick="{{cat.onCopyNext}}" style="{{cat.copyNextStyle}}" style-hover="transform: scale(1.04); background: #5D7A56; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">→ Recopier vers {{nextMonthLabel}}</button>
+            </sc-if>
+            <sc-if value="{{!isSubscribed}}" hint-placeholder-val="{{false}}">
+              <button onClick="{{openUpgrade}}" style="{{cat.copyNextStyle}}" style-hover="transform: scale(1.04); background: #5D7A56; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">→ Recopier vers {{nextMonthLabel}}</button>
+            </sc-if>
+            <sc-if value="{{cat.showFixVarTotal}}" hint-placeholder-val="{{false}}">
+              <div style="{{cat.fixVarTotalStyle}}">Total Fixes + Variables — Prévu {{cat.fixVarTotalPrevuFmt}} · Réel {{cat.fixVarTotalReelFmt}}</div>
+            </sc-if>
+            <sc-if value="{{cat.showTransfer}}" hint-placeholder-val="{{false}}">
+              <button onClick="{{cat.onTransfer}}" style="{{cat.transferStyle}}" style-hover="transform: scale(1.04); background: #C97B5A; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">↦ Transfert de fonds</button>
+            </sc-if>
+          </div>
+          </div>
+        </div>
+      </sc-for>
+
+      <sc-if value="{{isSubscribed}}" hint-placeholder-val="{{false}}">
+        <button onClick="{{addCustomCategory}}" style="{{addSectionButtonStyle}}" style-hover="transform: scale(1.02); background: #C97B5A; color: #fff;" style-active="transform: scale(0.95); opacity: 0.7;">+ Ajouter une section</button>
+      </sc-if>
+      <sc-if value="{{!isSubscribed}}" hint-placeholder-val="{{false}}">
+        <button onClick="{{openUpgrade}}" style="{{addSectionButtonStyle}}" style-hover="transform: scale(1.02); opacity: 0.85;" style-active="transform: scale(0.95); opacity: 0.7;">🔒 Ajouter une section (abonnement)</button>
+      </sc-if>
+
+    </div>
+
+    <sc-if value="{{!isMobile}}" hint-placeholder-val="{{true}}">
+      <div style="flex:0 0 380px;position:sticky;top:20px;display:flex;flex-direction:column;gap:16px">
+
+        <div style="{{sidebarCardStyle}}">
+          <div style="{{segWrapStyle}}">
+            <button onClick="{{setViewPrevu}}" style="{{viewPrevuBtnStyle}}" style-hover="transform: scale(1.03); background: #C97B5A; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">Prévu</button>
+            <button onClick="{{setViewReel}}" style="{{viewReelBtnStyle}}" style-hover="transform: scale(1.03); background: #C97B5A; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">Réel</button>
+          </div>
+
+          <sc-if value="{{pieLocked}}" hint-placeholder-val="{{false}}">
+            <div onClick="{{onSimulationClick}}" style="cursor:pointer;transition:transform 0.15s ease, filter 0.15s ease" style-hover="transform: scale(1.03); filter: brightness(1.05);" style-active="transform: scale(0.97); filter: brightness(0.95);">
+              <div style="{{piePreviewWrapStyle}}">
+                <div style="position:relative;width:132px;height:132px;flex:0 0 auto">
+                  <svg viewBox="0 0 140 140" width="132" height="132" style="transform:rotate(-90deg)">
+                    <circle cx="70" cy="70" r="52" fill="none" stroke="{{pieRingBaseColor}}" stroke-width="20"></circle>
+                    <sc-for list="{{pieSegments}}" as="seg" hint-placeholder-count="3">
+                      <circle cx="70" cy="70" r="52" fill="none" stroke="{{seg.color}}" stroke-width="20" stroke-dasharray="{{seg.dasharray}}" stroke-dashoffset="{{seg.dashoffset}}"></circle>
+                    </sc-for>
+                  </svg>
+                </div>
+                <div style="{{legendTextStyle}}">
+                  <div>Fixes {{pieFixedPct}}%</div>
+                  <div>Variables {{pieVarPct}}%</div>
+                  <div>Épargne {{pieSavePct}}%</div>
+                </div>
+              </div>
+              <div style="font:600 13px 'Nunito',sans-serif;margin-top:6px;color:{{mutedColor}}">Répartition de tes revenus entre fixes, variables et épargne.</div>
+              <div style="{{lockedPlaceholderStyle}}">🔒 Débloque le camembert avec l'abonnement (0,99 €/mois)</div>
+            </div>
+          </sc-if>
+          <sc-if value="{{pieShowChart}}" hint-placeholder-val="{{false}}">
+            <div style="display:flex;align-items:center;gap:18px">
+              <div style="position:relative;width:132px;height:132px;flex:0 0 auto">
+                <svg viewBox="0 0 140 140" width="132" height="132" style="transform:rotate(-90deg)">
+                  <circle cx="70" cy="70" r="52" fill="none" stroke="{{pieRingBaseColor}}" stroke-width="20"></circle>
+                  <sc-for list="{{pieSegments}}" as="seg" hint-placeholder-count="3">
+                    <circle cx="70" cy="70" r="52" fill="none" stroke="{{seg.color}}" stroke-width="20" stroke-dasharray="{{seg.dasharray}}" stroke-dashoffset="{{seg.dashoffset}}" style="{{seg.transitionStyle}}"></circle>
+                  </sc-for>
+                </svg>
+                <sc-for list="{{pieLabels}}" as="lbl" hint-placeholder-count="3">
+                  <div style="{{lbl.style}}">{{lbl.text}}</div>
+                </sc-for>
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none">
+                  <div style="{{pieCenterLabelStyle}}">{{pieCenterLabel}}</div>
+                  <div style="{{pieCenterAmountStyle}}">{{pieCenterAmountFmt}}</div>
+                </div>
+              </div>
+              <div style="{{legendTextStyle}}">
+                <div style="display:flex;align-items:center;gap:8px"><span style="width:11px;height:11px;border-radius:3px;background:#C97B5A;display:inline-block"></span>Fixes {{pieFixedPct}}% · {{pieFixedAmtFmt}}</div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="width:11px;height:11px;border-radius:3px;background:#E8C4B0;display:inline-block"></span>Variables {{pieVarPct}}% · {{pieVarAmtFmt}}</div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="width:11px;height:11px;border-radius:3px;background:#8FAF8A;display:inline-block"></span>Épargne {{pieSavePct}}% · {{pieSaveAmtFmt}}</div>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{pieShowEmpty}}" hint-placeholder-val="{{true}}">
+            <div style="{{placeholderTextStyle}}">Ajoute tes revenus pour voir la répartition</div>
+          </sc-if>
+        </div>
+
+        <sc-if value="{{hasCoherenceNote}}" hint-placeholder-val="{{false}}">
+          <div style="{{coherenceStyle}}">{{coherenceText}}</div>
+        </sc-if>
+
+        <div style="{{resultBannerStyle}}">
+          <div style="font:700 13px 'Nunito',sans-serif;text-transform:uppercase;letter-spacing:0.04em;opacity:0.75">Résultat du mois</div>
+          <div style="font:800 52px 'Quicksand',sans-serif;line-height:1.1;margin-top:6px">{{bigNumberText}}</div>
+          <div style="font:600 14px 'Nunito',sans-serif;margin-top:4px;opacity:0.85">{{bigNumberLabel}}</div>
+          <div style="font:600 12.5px 'Nunito',sans-serif;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.3);opacity:0.9">Fixes {{breakdownFixesFmt}} · Variables {{breakdownVarFmt}}<sc-if value="{{!isDeficit}}" hint-placeholder-val="{{true}}"> · Épargne {{breakdownEpargneFmt}}</sc-if><sc-if value="{{isDeficit}}" hint-placeholder-val="{{false}}"> · Déficit {{bigNumberText}}</sc-if></div>
+        </div>
+
+        <div style="{{sidebarCardStyle}}">
+          <div style="{{tableHeaderStyle}}">
+            <div></div><div style="text-align:right">Prévu</div><div style="text-align:right">Réel</div><div style="text-align:right">Écart</div>
+          </div>
+          <sc-for list="{{tableRows}}" as="row" hint-placeholder-count="5">
+            <div style="{{row.rowStyle}}">
+              <div style="{{row.labelStyle}}">{{row.label}}</div>
+              <div style="{{amountTextStyle}}">{{row.prevuFmt}}</div>
+              <div style="{{amountTextStyle}}">{{row.reelFmt}}</div>
+              <div style="{{row.ecartStyle}}">
+                <sc-if value="{{row.ecartUp}}" hint-placeholder-val="{{false}}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="flex:0 0 auto"><path d="M2 18l7-7 4 4 9-10" stroke="#5D7A56" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M16 5h6v6" stroke="#5D7A56" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg></sc-if>
+                <sc-if value="{{row.ecartDown}}" hint-placeholder-val="{{false}}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="flex:0 0 auto"><path d="M2 6l7 7 4-4 9 10" stroke="#B3452F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M16 19h6v-6" stroke="#B3452F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg></sc-if>
+                {{row.ecartAmountFmt}}
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+      </div>
+    </sc-if>
+
+  </div>
+
+  <div style="{{simulationStyle}}" onClick="{{onSimulationClick}}" style-hover="transform: scale(1.015); filter: brightness(1.06); box-shadow: 0 8px 22px rgba(92,68,51,0.22);" style-active="transform: scale(0.985); filter: brightness(0.95);">
+    <div style="font:700 13px 'Nunito',sans-serif;text-transform:uppercase;letter-spacing:0.06em;opacity:0.75">Projection sur 12 mois</div>
+    <sc-if value="{{isSubscribed}}" hint-placeholder-val="{{false}}">
+      <div style="font:800 clamp(28px,5vw,44px) 'Quicksand',sans-serif;margin-top:6px;line-height:1.15">{{simulationBigText}}</div>
+      <div style="font:600 14px 'Nunito',sans-serif;margin-top:6px;opacity:0.9">{{simulationSubText}}</div>
+    </sc-if>
+    <sc-if value="{{!isSubscribed}}" hint-placeholder-val="{{true}}">
+      <div style="{{simulationPreviewStyle}}">{{simulationBigText}}</div>
+      <div style="font:600 13px 'Nunito',sans-serif;margin-top:2px;opacity:0.85">Ce que tu aurais mis de côté (ou perdu) dans 12 mois au rythme de ce mois-ci.</div>
+      <div style="font:700 14px 'Nunito',sans-serif;margin-top:8px;opacity:0.95">🔒 Débloque la projection avec l'abonnement (0,99 €/mois)</div>
+    </sc-if>
+  </div>
+
+  <sc-if value="{{resultPositive}}" hint-placeholder-val="{{false}}">
+    <div style="{{bravoStyle}}">{{bravoText}}</div>
+  </sc-if>
+  <sc-if value="{{isDeficit}}" hint-placeholder-val="{{false}}">
+    <div style="{{encourageStyle}}">{{encourageText}}</div>
+  </sc-if>
+  <div style="{{footerStyle}}">
+    <a href="#" onClick="{{onFooterPrivacyClick}}" style="{{footerLinkStyle}}">Politique de confidentialité</a>
+    <a href="#" onClick="{{onResetOnboardingClick}}" style="{{footerLinkStyle}}">Inscription</a>
+  </div>
+</div>
+
+<div style="{{toastStyle}}"><sc-if value="{{toastVisible}}" hint-placeholder-val="{{false}}">✓ {{toastText}}</sc-if></div>
+
+<sc-if value="{{isMobile}}" hint-placeholder-val="{{false}}">
+  <div onClick="{{toggleExpanded}}" style="{{stickyBarStyle}}">
+    <div>
+      <div style="font:700 11px 'Nunito',sans-serif;text-transform:uppercase;letter-spacing:0.04em;opacity:0.75">Résultat du mois</div>
+      <div style="font:800 30px 'Quicksand',sans-serif;line-height:1.1">{{bigNumberText}}</div>
+    </div>
+    <div style="font:600 24px 'Nunito',sans-serif;opacity:0.8">⌃</div>
+  </div>
+
+  <div style="{{overlayStyle}}">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px 8px">
+      <div style="font:700 17px 'Quicksand',sans-serif;color:{{textColor}}">Résultat du mois</div>
+      <button onClick="{{toggleExpanded}}" style="{{navBtnStyle}}" style-hover="transform: scale(1.15); background: #C97B5A; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">✕</button>
+    </div>
+    <div style="padding:8px 20px 32px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:16px">
+
+      <div style="{{sidebarCardStyle}}">
+        <div style="{{segWrapStyle}}">
+          <button onClick="{{setViewPrevu}}" style="{{viewPrevuBtnStyle}}" style-hover="transform: scale(1.03); background: #C97B5A; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">Prévu</button>
+          <button onClick="{{setViewReel}}" style="{{viewReelBtnStyle}}" style-hover="transform: scale(1.03); background: #C97B5A; color: #fff;" style-active="transform: scale(0.85); opacity: 0.6; transition: transform 0.05s ease; filter: brightness(0.85);">Réel</button>
+        </div>
+        <sc-if value="{{pieLocked}}" hint-placeholder-val="{{false}}">
+          <div onClick="{{onSimulationClick}}" style="cursor:pointer;text-align:center;transition:transform 0.15s ease, filter 0.15s ease" style-hover="transform: scale(1.03); filter: brightness(1.05);" style-active="transform: scale(0.97); filter: brightness(0.95);">
+            <div style="{{piePreviewWrapStyle}}">
+              <div style="position:relative;width:132px;height:132px;flex:0 0 auto">
+                <svg viewBox="0 0 140 140" width="132" height="132" style="transform:rotate(-90deg)">
+                  <circle cx="70" cy="70" r="52" fill="none" stroke="{{pieRingBaseColor}}" stroke-width="20"></circle>
+                  <sc-for list="{{pieSegments}}" as="seg" hint-placeholder-count="3">
+                    <circle cx="70" cy="70" r="52" fill="none" stroke="{{seg.color}}" stroke-width="20" stroke-dasharray="{{seg.dasharray}}" stroke-dashoffset="{{seg.dashoffset}}"></circle>
+                  </sc-for>
+                </svg>
+              </div>
+              <div style="{{legendTextStyle}}">
+                <div>Fixes {{pieFixedPct}}%</div>
+                <div>Variables {{pieVarPct}}%</div>
+                <div>Épargne {{pieSavePct}}%</div>
+              </div>
+            </div>
+            <div style="font:600 13px 'Nunito',sans-serif;margin-top:6px;color:{{mutedColor}}">Répartition de tes revenus entre fixes, variables et épargne.</div>
+            <div style="{{lockedPlaceholderStyle}}">🔒 Débloque le camembert avec l'abonnement (0,99 €/mois)</div>
+          </div>
+        </sc-if>
+        <sc-if value="{{pieShowChart}}" hint-placeholder-val="{{false}}">
+          <div style="display:flex;align-items:center;gap:18px;justify-content:center">
+            <div style="position:relative;width:132px;height:132px;flex:0 0 auto">
+              <svg viewBox="0 0 140 140" width="132" height="132" style="transform:rotate(-90deg)">
+                <circle cx="70" cy="70" r="52" fill="none" stroke="{{pieRingBaseColor}}" stroke-width="20"></circle>
+                <sc-for list="{{pieSegments}}" as="seg" hint-placeholder-count="3">
+                  <circle cx="70" cy="70" r="52" fill="none" stroke="{{seg.color}}" stroke-width="20" stroke-dasharray="{{seg.dasharray}}" stroke-dashoffset="{{seg.dashoffset}}" style="{{seg.transitionStyle}}"></circle>
+                </sc-for>
+              </svg>
+              <sc-for list="{{pieLabels}}" as="lbl" hint-placeholder-count="3">
+                <div style="{{lbl.style}}">{{lbl.text}}</div>
+              </sc-for>
+              <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none">
+                <div style="{{pieCenterLabelStyle}}">{{pieCenterLabel}}</div>
+                <div style="{{pieCenterAmountStyle}}">{{pieCenterAmountFmt}}</div>
+              </div>
+            </div>
+            <div style="{{legendTextStyle}}">
+              <div style="display:flex;align-items:center;gap:8px"><span style="width:11px;height:11px;border-radius:3px;background:#C97B5A;display:inline-block"></span>Fixes {{pieFixedPct}}% · {{pieFixedAmtFmt}}</div>
+              <div style="display:flex;align-items:center;gap:8px"><span style="width:11px;height:11px;border-radius:3px;background:#E8C4B0;display:inline-block"></span>Variables {{pieVarPct}}% · {{pieVarAmtFmt}}</div>
+              <div style="display:flex;align-items:center;gap:8px"><span style="width:11px;height:11px;border-radius:3px;background:#8FAF8A;display:inline-block"></span>Épargne {{pieSavePct}}% · {{pieSaveAmtFmt}}</div>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{pieShowEmpty}}" hint-placeholder-val="{{true}}">
+          <div style="{{placeholderTextStyle}}">Ajoute tes revenus pour voir la répartition</div>
+        </sc-if>
+      </div>
+
+      <sc-if value="{{hasCoherenceNote}}" hint-placeholder-val="{{false}}">
+        <div style="{{coherenceStyle}}">{{coherenceText}}</div>
+      </sc-if>
+
+      <div style="{{resultBannerStyleMobile}}">
+        <div style="font:700 13px 'Nunito',sans-serif;text-transform:uppercase;letter-spacing:0.04em;opacity:0.75">Épargne réelle</div>
+        <div style="font:800 44px 'Quicksand',sans-serif;line-height:1.1;margin-top:6px">{{bigNumberText}}</div>
+        <div style="font:600 14px 'Nunito',sans-serif;margin-top:4px;opacity:0.85">{{bigNumberLabel}}</div>
+        <div style="font:600 12.5px 'Nunito',sans-serif;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.3);opacity:0.9">Fixes {{breakdownFixesFmt}} · Variables {{breakdownVarFmt}}<sc-if value="{{!isDeficit}}" hint-placeholder-val="{{true}}"> · Épargne {{breakdownEpargneFmt}}</sc-if><sc-if value="{{isDeficit}}" hint-placeholder-val="{{false}}"> · Déficit {{bigNumberText}}</sc-if></div>
+      </div>
+
+      <div style="{{sidebarCardStyle}}">
+        <div style="{{tableHeaderStyle}}">
+          <div></div><div style="text-align:right">Prévu</div><div style="text-align:right">Réel</div><div style="text-align:right">Écart</div>
+        </div>
+        <sc-for list="{{tableRows}}" as="row" hint-placeholder-count="5">
+          <div style="{{row.rowStyle}}">
+            <div style="{{row.labelStyle}}">{{row.label}}</div>
+            <div style="{{amountTextStyle}}">{{row.prevuFmt}}</div>
+            <div style="{{amountTextStyle}}">{{row.reelFmt}}</div>
+            <div style="{{row.ecartStyle}}">
+              <sc-if value="{{row.ecartUp}}" hint-placeholder-val="{{false}}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="flex:0 0 auto"><path d="M2 18l7-7 4 4 9-10" stroke="#5D7A56" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M16 5h6v6" stroke="#5D7A56" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg></sc-if>
+              <sc-if value="{{row.ecartDown}}" hint-placeholder-val="{{false}}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="flex:0 0 auto"><path d="M2 6l7 7 4-4 9 10" stroke="#B3452F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><path d="M16 19h6v-6" stroke="#B3452F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg></sc-if>
+              {{row.ecartAmountFmt}}
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+    </div>
+  </div>
+</sc-if>
+</sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const TERRACOTTA = '#C97B5A';
+const TERRACOTTA_LIGHT = '#E8C4B0';
+const SAGE = '#8FAF8A';
+const TEXT_SAGE = '#5D7A56';
+const TEXT_TERRACOTTA = '#B35F3D';
+const MUTED = 'rgba(92,68,51,0.5)';
+const BROWN = '#5C4433';
+
+const CATS_CONFIG = [
+  { key: 'revenus', label: "Rentrées d'argent", emptyText: "Ajoute tes premières rentrées d'argent pour commencer.", direction: 1 },
+  { key: 'fixes', label: 'Dépenses fixes', emptyText: 'Ajoute tes dépenses fixes (loyer, assurances, abonnements...).', direction: -1 },
+  { key: 'variables', label: 'Dépenses variables', emptyText: 'Ajoute tes dépenses variables (courses, loisirs, essence...).', direction: -1 },
+  { key: 'epargne', label: 'Épargne mise de côté', emptyText: "Indique ce que tu prévois d'épargner.", direction: 1 },
+  { key: 'investissement', label: 'Investissement', emptyText: "Ajoute ce que tu prévois d'investir (bourse, immobilier...).", direction: 1 },
+  { key: 'endettement', label: "Suivi d'un endettement", emptyText: "Ajoute tes crédits ou dettes en cours (prêt, découvert...).", direction: 1 },
+];
+const MONTHS_FR = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+
+function parseNum(v) {
+  if (typeof v !== 'string') return typeof v === 'number' ? v : 0;
+  const trimmed = v.trim().replace(',', '.');
+  if (trimmed === '') return 0;
+  if (/^-?\d+(\.\d+)?$/.test(trimmed)) { const n = parseFloat(trimmed); return isNaN(n) ? 0 : n; }
+  if (/^[0-9+\-*/.() \s]+$/.test(trimmed) && /[+\-*/]/.test(trimmed)) {
+    try { const r = Function(`"use strict";return (${trimmed})`)(); return typeof r === 'number' && isFinite(r) ? r : 0; } catch (e) { return 0; }
+  }
+  const n = parseFloat(trimmed);
+  return isNaN(n) ? 0 : n;
+}
+function fmt(n) { const r = Math.round((n || 0) * 100) / 100; return `${r.toLocaleString('fr-FR', { minimumFractionDigits: r % 1 !== 0 ? 2 : 0, maximumFractionDigits: 2 })} €`; }
+function signFmt(n) { const r = Math.round((n || 0) * 100) / 100; return (r > 0 ? '+' : '') + `${r.toLocaleString('fr-FR', { minimumFractionDigits: r % 1 !== 0 ? 2 : 0, maximumFractionDigits: 2 })} €`; }
+function genId() { return Math.random().toString(36).slice(2, 10) + Date.now().toString(36); }
+function emptyMonth() { return { revenus: [], fixes: [], variables: [], epargne: [], investissement: [], endettement: [] }; }
+function seedMonth(key) {
+  const monthKey = key || currentMonthKey();
+  const mk = (label, prevu, reel, day) => ({ id: genId(), label, prevu, reel, date: `${monthKey}-${String(day).padStart(2, '0')}` });
+  return {
+    revenus: [mk('Salaire', 2200, 2200, 1), mk('Prime', 0, 0, 1), mk('Autres revenus', 0, 0, 1)],
+    fixes: [mk('Loyer', 750, 750, 5), mk('Assurances', 60, 60, 5), mk('Abonnements', 35, 40, 8)],
+    variables: [mk('Courses', 300, 340, 15), mk('Loisirs', 100, 80, 20), mk('Essence', 80, 80, 12)],
+    epargne: [mk('Livret A', 200, 150, 28), mk('Assurance vie', 0, 0, 28), mk("Épargne projet", 0, 0, 28)],
+    investissement: [mk('PEA', 0, 0, 28), mk('Immobilier', 0, 0, 28), mk('Crypto', 0, 0, 28)],
+    endettement: [{ ...mk('Prêt personnel', 150, 150, 10), total: 3000 }, { ...mk('Crédit auto', 0, 0, 10), total: 0 }],
+  };
+}
+function currentMonthKey() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`; }
+const MOODS = [
+  { key: 'serein', label: 'Serein', color: '#8FAF8A' },
+  { key: 'motive', label: 'Motivé', color: '#C97B5A' },
+  { key: 'difficile', label: 'Difficile', color: '#C99A9A' },
+];
+const DEFICIT_QUOTES = [
+  "Je sais que ce mois a été dur, ajuste au maximum, revois tes priorités et ça ira.",
+  "Je sais, il n'a pas versé la pension alimentaire, on va y arriver quand même.",
+];
+const BRAVO_QUOTES = [
+  "Je sens qu'on va passer de bonnes vacances cet été !",
+  "Et si on mettait 30 euros de côté aujourd'hui pour nos vacances d'été !",
+];
+const MORNING_QUOTES = [
+  "Chaque petit pas compte : aujourd'hui est une nouvelle occasion d'avancer.",
+  "Tu as déjà surmonté des journées difficiles, celle-ci ne fait pas exception.",
+  "La discipline d'aujourd'hui construit la liberté de demain.",
+  "Respire, priorise, avance : tu es capable de bien plus que tu ne le crois.",
+  "Un bon budget, c'est un pas de plus vers tes rêves. Bonne journée !",
+];
+
+
+class Component extends DCLogic {
+  state = {
+    currentMonth: currentMonthKey(),
+    months: {},
+    view: 'reel',
+    windowWidth: typeof window !== 'undefined' ? window.innerWidth : 1200,
+    resultsExpanded: false,
+    darkMode: false,
+    userName: '',
+    lastName: '',
+    profession: '',
+    age: '',
+    onboardingStep: 0,
+    firstNameInput: '',
+    lastNameInput: '',
+    emailInput: '',
+    professionInput: '',
+    ageInput: '',
+    goalInput: '',
+    situationInput: '',
+    situationProInput: '',
+    situationPersoInput: '',
+    hasKidsInput: '',
+    customCategories: [],
+    diaryOpen: false,
+    diaryTexts: {},
+    diaryMoods: {},
+    diarySearch: '',
+    diaryViewKey: null,
+    privacyOpen: false,
+    categoryOrder: CATS_CONFIG.map(c => c.key),
+    historyOpen: false,
+    expandedHistoryMonth: null,
+    historySearch: '',
+    isSubscribed: false,
+    upgradeOpen: false,
+    datePickerKey: null,
+    calViewMonth: '',
+    micListening: false,
+    yearCalendarOpen: false,
+    yearCalYear: null,
+    selectedDayKey: null,
+    toastVisible: false,
+    toastText: '',
+    signupMonth: currentMonthKey(),
+    carryOver: true,
+    splashVisible: false,
+    splashFading: false,
+    splashQuote: '',
+  };
+
+  componentDidMount() {
+    try {
+      const raw = localStorage.getItem('sm-budget-v1');
+      if (raw) {
+        const data = JSON.parse(raw);
+        this.setState({ months: data.months || {}, currentMonth: data.currentMonth || this.state.currentMonth, darkMode: !!data.darkMode, userName: data.userName || '', lastName: '', profession: '', age: '', signupMonth: data.signupMonth || this.state.signupMonth, carryOver: data.carryOver !== undefined ? data.carryOver : true, customCategories: data.customCategories || [], categoryOrder: CATS_CONFIG.map(c => c.key).concat((data.customCategories || []).map(c => c.key)), diaryTexts: data.diaryTexts || {}, diaryMoods: data.diaryMoods || {} }, () => { this.ensureMonth(this.state.currentMonth); this.applyBodyBg(); });
+      } else {
+        this.ensureMonth(this.state.currentMonth);
+        this.applyBodyBg();
+      }
+    } catch (e) { this.ensureMonth(this.state.currentMonth); this.applyBodyBg(); }
+    this._onResize = () => this.setState({ windowWidth: window.innerWidth });
+    window.addEventListener('resize', this._onResize);
+    this._onKeydown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && (e.key === 'z' || e.key === 'Z') && !e.shiftKey) {
+        e.preventDefault();
+        this.undo();
+      }
+    };
+    window.addEventListener('keydown', this._onKeydown);
+    this._undoStack = [];
+    this.focusStepInput();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+    window.removeEventListener('keydown', this._onKeydown);
+  }
+  componentDidUpdate(prevProps) {
+    if (this._restoringUndo) { this._restoringUndo = false; this._lastSnapshot = this._snapshotStr(); return; }
+    const cur = this._snapshotStr();
+    if (this._lastSnapshot !== undefined && this._lastSnapshot !== cur) {
+      if (!this._undoStack) this._undoStack = [];
+      if (this._undoStack[this._undoStack.length - 1] !== this._lastSnapshot) {
+        this._undoStack.push(this._lastSnapshot);
+        if (this._undoStack.length > 50) this._undoStack.shift();
+      }
+    }
+    this._lastSnapshot = cur;
+  }
+  _snapshotStr() {
+    const s = this.state;
+    return JSON.stringify({ months: s.months, customCategories: s.customCategories, categoryOrder: s.categoryOrder, diaryTexts: s.diaryTexts, diaryMoods: s.diaryMoods });
+  }
+  undo() {
+    if (!this._undoStack || !this._undoStack.length) return;
+    const snap = JSON.parse(this._undoStack.pop());
+    this._restoringUndo = true;
+    this.setState({ months: snap.months, customCategories: snap.customCategories, categoryOrder: snap.categoryOrder, diaryTexts: snap.diaryTexts, diaryMoods: snap.diaryMoods }, () => { this.save(); this.showToast('Modification annulée', '#5D7A56'); });
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._onResize); }
+
+  focusStepInput() {
+    const selMap = { 0: 'input[placeholder="Prénom"]', 1: 'input[placeholder="Ta profession"]', 2: 'input[placeholder="Ton âge"]' };
+    const sel = selMap[this.state.onboardingStep];
+    if (!sel) return;
+    clearTimeout(this._focusTimer);
+    this._focusToken = (this._focusToken || 0) + 1;
+    const token = this._focusToken;
+    const tries = [0, 50, 150];
+    tries.forEach(delay => {
+      setTimeout(() => {
+        if (token !== this._focusToken) return;
+        const el = document.querySelector(sel);
+        if (el) el.focus();
+      }, delay);
+    });
+  }
+
+
+  showSplash() {
+    const quote = MORNING_QUOTES[0];
+    this.setState({ splashVisible: true, splashFading: false, splashQuote: quote });
+    clearTimeout(this._splashT1); clearTimeout(this._splashT2);
+    this._splashT1 = setTimeout(() => this.setState({ splashFading: true }), 4400);
+    this._splashT2 = setTimeout(() => this.setState({ splashVisible: false }), 5000);
+  }
+
+  applyBodyBg() {
+    document.body.style.transition = 'background 0.3s ease';
+    document.body.style.background = this.state.darkMode ? '#302F2E' : '#F4EDE4';
+  }
+  toggleDarkMode() {
+    this.setState(s => ({ darkMode: !s.darkMode }), () => { this.applyBodyBg(); this.save(); });
+  }
+  toggleHistory() { this.setState(s => ({ historyOpen: !s.historyOpen })); }
+  toggleHistoryDetail(key) { this.setState(s => ({ expandedHistoryMonth: s.expandedHistoryMonth === key ? null : key })); }
+  onHistoryClick() { if (this.state.isSubscribed) this.toggleHistory(); else this.openUpgrade(); }
+  onSimulationClick() { if (!this.state.isSubscribed) this.openUpgrade(); }
+  openUpgrade() { this.setState({ upgradeOpen: true }); }
+  closeUpgrade() { this.setState({ upgradeOpen: false }); }
+  subscribeNow() { this.setState({ isSubscribed: true, upgradeOpen: false }, () => this.save()); }
+
+  onboardingNext() {
+    const s = this.state;
+    if (s.onboardingStep === 0) {
+      if (!s.firstNameInput.trim() || !s.lastNameInput.trim() || !s.emailInput.trim() || !s.ageInput) return;
+      if (parseInt(s.ageInput, 10) < 18) { this.showToast("Il faut avoir 18 ans ou plus pour t'inscrire", '#B35F3D'); return; }
+      this.setState({ onboardingStep: 1 }, () => this.focusStepInput());
+    } else if (s.onboardingStep === 1) {
+      if (!s.goalInput) return;
+      this.setState({ onboardingStep: 2 }, () => this.focusStepInput());
+    } else if (s.onboardingStep === 2) {
+      if (!s.situationProInput) return;
+      this.setState({ onboardingStep: 3 }, () => this.focusStepInput());
+    } else if (s.onboardingStep === 3) {
+      if (!s.situationPersoInput) return;
+      this.setState({ onboardingStep: 4 }, () => this.focusStepInput());
+    } else if (s.onboardingStep === 4) {
+      if (!s.hasKidsInput) return;
+      this.setState({ onboardingStep: 5 }, () => { if (document.activeElement) document.activeElement.blur(); });
+    } else {
+      this.finishOnboarding(true);
+    }
+  }
+  pickGoal(val) { this.setState({ goalInput: val }, () => this.onboardingNext()); }
+  pickSituationPro(val) { this.setState({ situationProInput: val }, () => this.onboardingNext()); }
+  pickSituationPerso(val) { this.setState({ situationPersoInput: val }, () => this.onboardingNext()); }
+  pickHasKids(val) { this.setState({ hasKidsInput: val }, () => this.onboardingNext()); }
+  skipToFree() { this.finishOnboarding(false); }
+  finishOnboarding(subscribed) {
+    const s = this.state;
+    {
+      const payload = { prenom: s.firstNameInput.trim(), nom: s.lastNameInput.trim(), email: s.emailInput.trim(), age: s.ageInput, objectif: s.goalInput, situationPro: s.situationProInput, situationPerso: s.situationPersoInput, enfants: s.hasKidsInput === 'Avec enfants' ? 'Oui' : (s.hasKidsInput === 'Sans enfants' ? 'Non' : ''), version: subscribed ? 'Payante' : 'Gratuite' };
+      this.setState({
+        userName: payload.prenom, lastName: payload.nom,
+        goal: payload.objectif, situation: `${payload.situationPro} / ${payload.situationPerso} / ${payload.enfants}`,
+        isSubscribed: subscribed, upgradeOpen: false,
+      }, () => {
+        this.save(); this.showSplash();
+        try {
+          fetch('https://script.google.com/macros/s/AKfycbyuA1_IKfogDnNQuNP8HhmlUkgcE3SpBDHEL_2yZjVETz7qOY6hNpZDiW-rskwB3Rz8/exec', {
+
+            method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload),
+          });
+        } catch (e) {}
+      });
+    }
+  }
+  onboardingBack() { this.setState(s => ({ onboardingStep: Math.max(0, s.onboardingStep - 1) }), () => this.focusStepInput()); }
+  resetOnboarding() {
+    this.setState({ userName: '', lastName: '', goal: '', situation: '', onboardingStep: 0, firstNameInput: '', lastNameInput: '', emailInput: '', ageInput: '', goalInput: '', situationProInput: '', situationPersoInput: '', hasKidsInput: '' }, () => this.save());
+  }
+
+  save() {
+    try { localStorage.setItem('sm-budget-v1', JSON.stringify({ months: this.state.months, currentMonth: this.state.currentMonth, darkMode: this.state.darkMode, userName: this.state.userName, lastName: this.state.lastName, profession: this.state.profession, age: this.state.age, signupMonth: this.state.signupMonth, carryOver: this.state.carryOver, categoryOrder: this.state.categoryOrder, customCategories: this.state.customCategories, diaryTexts: this.state.diaryTexts, diaryMoods: this.state.diaryMoods })); } catch (e) {}
+  }
+
+  nextMonthKeyOf(key) {
+    const [y, m] = key.split('-').map(Number);
+    const d = new Date(y, m, 1);
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+  }
+
+  copySectionToNextMonth(catKey) {
+    const nextKey = this.nextMonthKeyOf(this.state.currentMonth);
+    this.setState(s => {
+      const cur = s.months[s.currentMonth] || emptyMonth();
+      const nextMonth = s.months[nextKey] || emptyMonth();
+      const shiftDate = (dateStr) => { if (!dateStr) return `${nextKey}-01`; const day = dateStr.slice(8, 10); return `${nextKey}-${day}`; };
+      const copiedLines = (cur[catKey] || []).map(l => ({ id: genId(), label: l.label, prevu: l.prevu, reel: l.reel, date: shiftDate(l.date) }));
+      return { months: { ...s.months, [nextKey]: { ...nextMonth, [catKey]: copiedLines } } };
+    }, () => { this.save(); this.showToast('Recopié vers le mois suivant', TEXT_SAGE); });
+  }
+
+  onMicClick() {
+    if (!this.state.isSubscribed) { this.openUpgrade(); return; }
+    if (this.state.micListening) { if (this._recognition) this._recognition.stop(); return; }
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) { this.showToast('Micro non supporté sur ce navigateur', '#B35F3D'); return; }
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(stream => { stream.getTracks().forEach(t => t.stop()); this.startRecognition(SR); })
+        .catch(() => this.showToast('Accès au micro refusé — autorise-le dans les réglages du navigateur', '#B35F3D'));
+    } else {
+      this.startRecognition(SR);
+    }
+  }
+  startRecognition(SR) {
+    const rec = new SR();
+    rec.lang = 'fr-FR';
+    rec.interimResults = false;
+    rec.maxAlternatives = 1;
+    rec.onresult = (e) => {
+      const transcript = e.results[0][0].transcript;
+      this.processVoiceCommand(transcript);
+    };
+    rec.onerror = (e) => {
+      this.setState({ micListening: false });
+      if (e.error === 'not-allowed' || e.error === 'permission-denied') this.showToast('Micro refusé — autorise-le dans les réglages', '#B35F3D');
+      else this.showToast('Micro non reconnu, réessaie', '#B35F3D');
+    };
+    rec.onend = () => this.setState({ micListening: false });
+    this._recognition = rec;
+    this.setState({ micListening: true });
+    try { rec.start(); } catch (e) { this.setState({ micListening: false }); }
+  }
+  processVoiceCommand(rawText) {
+    const text = rawText.trim();
+    const low = text.toLowerCase();
+    if (low.includes('journal')) {
+      let phrase = text.replace(/dans le journal/i, '').trim();
+      phrase = phrase.replace(/^(mets?|écris?|note)\s+(que\s+)?/i, '').trim();
+      if (phrase) {
+        const key = this.state.currentMonth;
+        this.setState(s => ({ diaryTexts: { ...s.diaryTexts, [key]: ((s.diaryTexts[key] || '') + (s.diaryTexts[key] ? '\n' : '') + phrase) } }), () => { this.save(); this.showToast('Ajouté au journal ✓', '#5D7A56'); });
+        return;
+      }
+    }
+    const numMatch = low.match(/(\d+(?:[.,]\d+)?)/);
+    if (numMatch) {
+      const amount = parseFloat(numMatch[1].replace(',', '.'));
+      const afterNum = low.slice(numMatch.index + numMatch[0].length);
+      const targetMatch = afterNum.match(/dans\s+(?:le|la|les|l')?\s*([a-zàâéèêëîïôûùç\s]+)/i);
+      const targetName = targetMatch ? targetMatch[1].trim() : '';
+      if (targetName) {
+        const applied = this.applyVoiceAmount(targetName, amount);
+        if (applied) { this.showToast(`${targetName} → ${fmt(amount)} ✓`, '#5D7A56'); return; }
+      }
+    }
+    this.showToast('Commande non comprise, réessaie', '#B35F3D');
+  }
+  applyVoiceAmount(targetName, amount) {
+    const s = this.state;
+    const key = s.currentMonth;
+    const md = s.months[key];
+    if (!md) return false;
+    const norm = str => str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+    const target = norm(targetName);
+    const allCats = CATS_CONFIG.concat(s.customCategories.map(c => ({ key: c.key, label: c.label })));
+    for (const cfg of allCats) {
+      const lines = md[cfg.key] || [];
+      for (const l of lines) {
+        if (l.label && (norm(l.label).includes(target) || target.includes(norm(l.label)))) {
+          this.setLineField(cfg.key, l.id, 'reel', amount);
+          return true;
+        }
+      }
+    }
+    for (const cfg of allCats) {
+      if (norm(cfg.label).includes(target) || target.includes(norm(cfg.label))) {
+        const id = genId();
+        this.setState(st => {
+          const m = { ...st.months };
+          const mkey = st.currentMonth;
+          const catLines = (m[mkey][cfg.key] || []).concat([{ id, label: targetName.charAt(0).toUpperCase() + targetName.slice(1), prevu: amount, reel: amount, date: `${mkey}-01` }]);
+          m[mkey] = { ...m[mkey], [cfg.key]: catLines };
+          return { months: m };
+        }, () => this.save());
+        return true;
+      }
+    }
+    return false;
+  }
+  showToast(text, color) {
+    clearTimeout(this._toastTimer);
+    this.setState({ toastText: text, toastVisible: true, toastColor: color || TEXT_SAGE });
+    this._toastTimer = setTimeout(() => this.setState({ toastVisible: false }), 2200);
+  }
+
+  transferSectionToNextMonth(catKey, amount) {
+    const nextKey = this.nextMonthKeyOf(this.state.currentMonth);
+    this.setState(s => {
+      const nextMonth = s.months[nextKey] || emptyMonth();
+      const line = { id: genId(), label: 'Solde reporté', prevu: amount, reel: amount, date: `${nextKey}-01` };
+      return { months: { ...s.months, [nextKey]: { ...nextMonth, [catKey]: [...(nextMonth[catKey] || []), line] } } };
+    }, () => { this.save(); this.showToast('Transfert de fonds effectué', TEXT_TERRACOTTA); });
+  }
+
+  carryOverFrom(prevMonth, newKey) {
+    const shiftDate = (dateStr) => { if (!dateStr) return `${newKey}-01`; const day = dateStr.slice(8, 10); return `${newKey}-${day}`; };
+    const mapCat = (lines) => (lines || []).map(l => ({ id: genId(), label: l.label, prevu: l.prevu, reel: l.reel, date: shiftDate(l.date) }));
+    const result = { revenus: mapCat(prevMonth.revenus), fixes: mapCat(prevMonth.fixes), variables: mapCat(prevMonth.variables), epargne: mapCat(prevMonth.epargne), investissement: mapCat(prevMonth.investissement), endettement: mapCat(prevMonth.endettement) };
+    this.state.customCategories.forEach(c => { result[c.key] = mapCat(prevMonth[c.key]); });
+    return result;
+  }
+
+  ensureMonth(key) {
+    const month = this.state.months[key];
+    if (!month) {
+      const priorKey = Object.keys(this.state.months).filter(k => k < key).sort().pop();
+      if (this.state.carryOver && priorKey) {
+        this.setState(s => ({ months: { ...s.months, [key]: this.carryOverFrom(s.months[priorKey], key) } }), () => this.save());
+      } else {
+        this.setState(s => ({ months: { ...s.months, [key]: seedMonth(key) } }), () => this.save());
+      }
+      return;
+    }
+    let changed = false;
+    const filled = {};
+    const seeded = seedMonth(key);
+    ['revenus', 'fixes', 'variables', 'epargne', 'investissement', 'endettement'].forEach(cat => {
+      if (!month[cat] || month[cat].length === 0) { filled[cat] = seeded[cat]; changed = true; }
+      else filled[cat] = month[cat];
+    });
+    if (changed) {
+      this.setState(s => ({ months: { ...s.months, [key]: filled } }), () => this.save());
+    }
+  }
+
+  getMonthData(key) { return this.state.months[key] || emptyMonth(); }
+
+  updateCat(catKey, updater) {
+    this.setState(s => {
+      const cur = s.months[s.currentMonth] || emptyMonth();
+      const updatedCat = updater(cur[catKey] || []);
+      const newMonth = { ...cur, [catKey]: updatedCat };
+      return { months: { ...s.months, [s.currentMonth]: newMonth } };
+    }, () => this.save());
+  }
+
+  _amountDrafts = {};
+  setAmountDraft(key, value) { this._amountDrafts[key] = value; this.forceUpdate(); }
+  commitAmountDraft(key, catKey, id, field) {
+    const raw = this._amountDrafts[key];
+    delete this._amountDrafts[key];
+    if (raw !== undefined) {
+      const value = this.state.isSubscribed ? parseNum(raw) : (parseFloat(String(raw).replace(',', '.')) || 0);
+      this.setLineField(catKey, id, field, value);
+    } else this.forceUpdate();
+  }
+  addLine(catKey) { this.updateCat(catKey, lines => [...lines, { id: genId(), label: '', prevu: 0, reel: 0 }]); }
+  removeLine(catKey, id) { this.updateCat(catKey, lines => lines.filter(l => l.id !== id)); }
+  setLineField(catKey, id, field, value) { this.updateCat(catKey, lines => lines.map(l => l.id === id ? { ...l, [field]: value } : l)); }
+  openYearCalendar() {
+    const [y] = this.state.currentMonth.split('-').map(Number);
+    this.setState({ yearCalendarOpen: true, yearCalYear: y, selectedDayKey: null });
+  }
+  closeYearCalendar() { this.setState({ yearCalendarOpen: false, selectedDayKey: null }); }
+  shiftYearCal(delta) { this.setState(s => ({ yearCalYear: s.yearCalYear + delta, selectedDayKey: null })); }
+  selectCalDay(dateStr) { this.setState(s => ({ selectedDayKey: s.selectedDayKey === dateStr ? null : dateStr })); }
+  monthCalSummary(year, monthNum) {
+    const s = this.state;
+    const key = `${year}-${String(monthNum).padStart(2, '0')}`;
+    const md = s.months[key];
+    if (!s.isSubscribed || !md || key > currentMonthKey()) return { hasSummary: false };
+    const sumReel = (arr) => (arr || []).reduce((acc, l) => acc + (l.reel || 0), 0);
+    const sumPrevu = (arr) => (arr || []).reduce((acc, l) => acc + (l.prevu || 0), 0);
+    const expenses = sumReel(md.fixes) + sumReel(md.variables) + sumReel(md.investissement) + sumPrevu(md.endettement) + s.customCategories.reduce((acc, c) => acc + sumReel(md[c.key]), 0);
+    const epargne = sumReel(md.epargne);
+    const isDeficitMonth = epargne <= 0;
+    return {
+      hasSummary: true,
+      summaryStyle: { marginTop: 'auto', marginBottom: 0, fontSize: 10.5, fontWeight: 700, color: '#fff', background: isDeficitMonth ? '#B35F3D' : '#5D7A56', borderRadius: 8, padding: '5px 9px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', display: 'flex', justifyContent: 'space-between', gap: 6 },
+      expensesFmt: fmt(expenses), epargneFmt: fmt(epargne),
+    };
+  }
+  spentOnDay(dateStr) {
+    let total = 0;
+    const items = [];
+    const spendCatKeys = ['fixes', 'variables'].concat(this.state.customCategories.map(c => c.key));
+    Object.values(this.state.months).forEach(md => {
+      spendCatKeys.forEach(catKey => {
+        (md[catKey] || []).forEach(l => { if (l.date === dateStr && (l.reel || 0) !== 0) { total += l.reel; items.push({ label: l.label || '(sans nom)', amount: l.reel }); } });
+      });
+    });
+    return { total, items };
+  }
+  openDatePicker(catKey, id, currentDate) {
+    const key = catKey + ':' + id;
+    if (this.state.datePickerKey === key) { this.setState({ datePickerKey: null }); return; }
+    const base = currentDate || `${currentMonthKey()}-01`;
+    this.setState({ datePickerKey: key, calViewMonth: base.slice(0, 7) });
+  }
+  closeDatePicker() { this.setState({ datePickerKey: null }); }
+  shiftCalMonth(delta) {
+    this.setState(s => {
+      const [y, m] = s.calViewMonth.split('-').map(Number);
+      const d = new Date(y, m - 1 + delta, 1);
+      return { calViewMonth: `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}` };
+    });
+  }
+  pickDate(catKey, id, dateStr) {
+    this.setLineField(catKey, id, 'date', dateStr);
+    this.setState({ datePickerKey: null });
+  }
+  moveLine(catKey, id, delta) {
+    this.updateCat(catKey, lines => {
+      const idx = lines.findIndex(l => l.id === id);
+      const newIdx = idx + delta;
+      if (idx < 0 || newIdx < 0 || newIdx >= lines.length) return lines;
+      const copy = [...lines];
+      const [item] = copy.splice(idx, 1);
+      copy.splice(newIdx, 0, item);
+      return copy;
+    });
+  }
+  reorderLine(catKey, draggedId, targetId) {
+    if (draggedId === targetId) return;
+    this.updateCat(catKey, lines => {
+      const fromIdx = lines.findIndex(l => l.id === draggedId);
+      const toIdx = lines.findIndex(l => l.id === targetId);
+      if (fromIdx < 0 || toIdx < 0) return lines;
+      const copy = [...lines];
+      const [item] = copy.splice(fromIdx, 1);
+      copy.splice(toIdx, 0, item);
+      return copy;
+    });
+  }
+  toggleDiary() { this.setState(s => ({ diaryOpen: !s.diaryOpen, diaryViewKey: null })); }
+  onDiaryClick() { this.toggleDiary(); }
+  togglePrivacy() { this.setState(s => ({ privacyOpen: !s.privacyOpen })); }
+  viewDiaryMonth(key) { this.setState(s => ({ diaryViewKey: key === s.currentMonth ? null : key })); }
+  closeDiaryView() { this.setState({ diaryViewKey: null }); }
+  onDiaryChange(text) {
+    this.setState(s => ({ diaryTexts: { ...s.diaryTexts, [s.currentMonth]: text } }), () => this.save());
+  }
+  setDiaryMood(monthKey, moodKey) {
+    this.setState(s => ({ diaryMoods: { ...s.diaryMoods, [monthKey]: s.diaryMoods[monthKey] === moodKey ? null : moodKey } }), () => this.save());
+  }
+  goToMonth(key) { this.setState({ currentMonth: key }, () => { this.save(); this.ensureMonth(key); }); }
+  saveChangesNow() { this.save(); this.showToast('Modifications enregistrées', '#5D7A56'); }
+  exportMonthToSheet() {
+    const s = this.state;
+    const data = this.getMonthData(s.currentMonth);
+    const rows = [];
+    CATS_CONFIG.forEach(cfg => {
+      (data[cfg.key] || []).forEach(l => rows.push({ categorie: cfg.label, intitule: l.label || '', prevu: l.prevu || 0, reel: l.reel || 0 }));
+    });
+    const payload = { export: true, mois: s.currentMonth, prenom: s.userName, lignes: rows };
+    try {
+      fetch('https://script.google.com/macros/s/AKfycbyuA1_IKfogDnNQuNP8HhmlUkgcE3SpBDHEL_2yZjVETz7qOY6hNpZDiW-rskwB3Rz8/exec', {
+        method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload),
+      });
+    } catch (e) {}
+    this.showToast('Budget exporté', '#5D7A56');
+  }
+  saveResultToNotes() {
+    const s = this.state;
+    const data = this.getMonthData(s.currentMonth);
+    const sum = (arr) => (arr || []).reduce((acc, l) => acc + (l.reel || 0), 0);
+    const revenusReel = sum(data.revenus);
+    const depensesReel = sum(data.fixes) + sum(data.variables);
+    const resultM = revenusReel - depensesReel;
+    const [ky, km] = s.currentMonth.split('-').map(Number);
+    const line = `Résultat de ${MONTHS_FR[km - 1]} ${ky} : ${signFmt(resultM)}.`;
+    this.setState(s2 => {
+      const existing = s2.diaryTexts[s2.currentMonth] || '';
+      const newText = existing.trim() ? existing + '\n' + line : line;
+      return { diaryTexts: { ...s2.diaryTexts, [s2.currentMonth]: newText } };
+    }, () => { this.save(); this.showToast('Ajouté à tes notes', '#C97B5A'); });
+  }
+  addCustomCategory() {
+    const key = 'custom_' + genId();
+    this.setState(s => ({
+      customCategories: [...s.customCategories, { key, label: 'Nouvelle section' }],
+      categoryOrder: [...s.categoryOrder, key],
+    }), () => this.save());
+  }
+  renameCustomCategory(key, label) {
+    this.setState(s => ({ customCategories: s.customCategories.map(c => c.key === key ? { ...c, label } : c) }), () => this.save());
+  }
+  removeCustomCategory(key) {
+    this.setState(s => ({
+      customCategories: s.customCategories.filter(c => c.key !== key),
+      categoryOrder: s.categoryOrder.filter(k => k !== key),
+    }), () => this.save());
+  }
+  moveCategory(key, delta) {
+    this.setState(s => {
+      const order = [...s.categoryOrder];
+      const idx = order.indexOf(key);
+      const newIdx = idx + delta;
+      if (idx < 0 || newIdx < 0 || newIdx >= order.length) return {};
+      order.splice(idx, 1);
+      order.splice(newIdx, 0, key);
+      return { categoryOrder: order };
+    }, () => this.save());
+  }
+  reorderCategory(draggedKey, targetKey) {
+    if (draggedKey === targetKey) return;
+    this.setState(s => {
+      const order = [...s.categoryOrder];
+      const fromIdx = order.indexOf(draggedKey);
+      const toIdx = order.indexOf(targetKey);
+      if (fromIdx < 0 || toIdx < 0) return {};
+      order.splice(fromIdx, 1);
+      order.splice(toIdx, 0, draggedKey);
+      return { categoryOrder: order };
+    }, () => this.save());
+  }
+
+  shiftMonth(delta) {
+    this.setState(s => {
+      if (delta < 0 && !s.isSubscribed) {
+        const [cy, cm] = currentMonthKey().split('-').map(Number);
+        const oneBackDate = new Date(cy, cm - 1 - 1, 1);
+        const oneBack = `${oneBackDate.getFullYear()}-${String(oneBackDate.getMonth() + 1).padStart(2, '0')}`;
+        if (s.currentMonth <= oneBack) { this.openUpgrade(); return {}; }
+      }
+      const [y, m] = s.currentMonth.split('-').map(Number);
+      const d = new Date(y, m - 1 + delta, 1);
+      return { currentMonth: `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}` };
+    }, () => { this.save(); this.ensureMonth(this.state.currentMonth); });
+  }
+
+  renderVals() {
+    const s = this.state;
+    const dm = s.darkMode;
+    const theme = {
+      bg: dm ? '#302F2E' : '#F4EDE4',
+      card: dm ? '#3D3B39' : '#FFFFFF',
+      cardBorder: dm ? '1px solid rgba(244,237,228,0.1)' : '1px solid rgba(92,68,51,0.08)',
+      cardShadow: dm ? '0 2px 14px rgba(0,0,0,0.3)' : '0 2px 12px rgba(92,68,51,0.06)',
+      input: dm ? '#282726' : '#FBF7F0',
+      inputBorder: dm ? '1px solid rgba(244,237,228,0.16)' : '1px solid rgba(92,68,51,0.15)',
+      text: dm ? '#F2EDE7' : '#5C4433',
+      muted: dm ? 'rgba(242,237,231,0.55)' : 'rgba(92,68,51,0.5)',
+      mutedBorder: dm ? '1px solid rgba(244,237,228,0.12)' : '1px solid rgba(92,68,51,0.06)',
+      segWrap: dm ? '#282726' : '#F4EDE4',
+      navBg: dm ? '#3D3B39' : '#F4EDE4',
+      navColor: dm ? '#F2EDE7' : '#6B4F3F',
+      dashText: dm ? '#EFCFC0' : '#B35F3D',
+      dragDot: dm ? 'rgba(242,237,231,0.35)' : 'rgba(92,68,51,0.3)',
+    };
+    const data = this.getMonthData(s.currentMonth);
+    const isMobile = s.windowWidth < 880;
+    const [y, m] = s.currentMonth.split('-').map(Number);
+    const monthLabel = `${MONTHS_FR[m - 1]} ${y}`;
+
+    const rawTotals = {};
+    const baseCardStyle = { background: theme.card, borderRadius: 20, padding: '20px 22px', boxShadow: theme.cardShadow, border: theme.cardBorder };
+    const cumulativePaidByLabel = (label) => {
+      let sum = 0;
+      Object.keys(s.months).filter(k => k <= s.currentMonth).forEach(k => {
+        (s.months[k].endettement || []).forEach(l => { if ((l.label || '') === label) sum += (l.prevu || 0); });
+      });
+      return sum;
+    };
+    const allCatsConfig = CATS_CONFIG.concat(s.customCategories.map(c => ({ key: c.key, label: c.label, emptyText: 'Ajoute une ligne pour commencer.', direction: 1, custom: true })));
+    const visibleCatsConfig = allCatsConfig;
+    const categoriesData = s.categoryOrder.map(k => visibleCatsConfig.find(c => c.key === k)).filter(Boolean).map((cfg, catIdx, arr) => {
+      const isFirstCat = catIdx === 0, isLastCat = catIdx === arr.length - 1;
+      const isDraggingCat = this._catDragKey === cfg.key;
+      const rawLinesFull = data[cfg.key] || [];
+      const lineCap = s.isSubscribed ? Infinity : (cfg.key === 'revenus' ? 3 : cfg.key === 'epargne' ? 2 : 5);
+      const rawLines = rawLinesFull.slice(0, lineCap === Infinity ? rawLinesFull.length : lineCap);
+      const totalPrevu = rawLines.reduce((acc, l) => acc + (l.prevu || 0), 0);
+      const totalReel = rawLines.reduce((acc, l) => acc + (l.reel || 0), 0);
+      rawTotals[cfg.key] = { prevu: totalPrevu, reel: totalReel };
+      const ecart = totalReel - totalPrevu;
+      const good = ecart === 0 ? null : (cfg.direction === 1 ? ecart > 0 : ecart < 0);
+      const lines = rawLines.map((l, i) => {
+        const isFirst = i === 0, isLast = i === rawLines.length - 1;
+        const arrowBase = { width: 13, height: 13, border: 'none', background: 'transparent', fontSize: 8, lineHeight: '13px', padding: 0, cursor: 'pointer' };
+        const isDragging = this._dragInfo && this._dragInfo.catKey === cfg.key && this._dragInfo.id === l.id;
+        const draftKeyP = `${cfg.key}:${l.id}:prevu`, draftKeyR = `${cfg.key}:${l.id}:reel`, draftKeyT = `${cfg.key}:${l.id}:total`;
+        return {
+          ...l,
+          prevuDisplay: this._amountDrafts && this._amountDrafts[draftKeyP] !== undefined ? this._amountDrafts[draftKeyP] : (l.prevu === 0 ? '' : l.prevu),
+          reelDisplay: this._amountDrafts && this._amountDrafts[draftKeyR] !== undefined ? this._amountDrafts[draftKeyR] : (l.reel === 0 ? '' : l.reel),
+          totalDisplay: this._amountDrafts && this._amountDrafts[draftKeyT] !== undefined ? this._amountDrafts[draftKeyT] : ((l.total || 0) === 0 ? '' : l.total),
+          isFirst, isLast,
+          date: l.date || '',
+          onDate: e => this.setLineField(cfg.key, l.id, 'date', e.target.value),
+          dateDisplay: l.date ? (() => { const [dy, dm, dd] = l.date.split('-'); return `${dd}/${dm}/${dy}`; })() : 'Date',
+          datePickerOpen: s.datePickerKey === (cfg.key + ':' + l.id),
+          onOpenDatePicker: () => this.openDatePicker(cfg.key, l.id, l.date),
+          onCalPrevMonth: () => this.shiftCalMonth(-1),
+          onCalNextMonth: () => this.shiftCalMonth(1),
+          calMonthLabel: (() => { const [vy, vm] = (s.calViewMonth || currentMonthKey()).split('-').map(Number); return `${MONTHS_FR[vm - 1]} ${vy}`; })(),
+          calDays: (() => {
+            const [vy, vm] = (s.calViewMonth || currentMonthKey()).split('-').map(Number);
+            const firstDay = new Date(vy, vm - 1, 1);
+            const startOffset = (firstDay.getDay() + 6) % 7; // Monday=0
+            const daysInMonth = new Date(vy, vm, 0).getDate();
+            const cells = [];
+            for (let i = 0; i < startOffset; i++) cells.push({ label: '', dayStyle: { visibility: 'hidden' }, onSelect: () => {} });
+            for (let d = 1; d <= daysInMonth; d++) {
+              const dateStr = `${vy}-${String(vm).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+              const isSelected = l.date === dateStr;
+              cells.push({
+                label: String(d),
+                onSelect: () => this.pickDate(cfg.key, l.id, dateStr),
+                dayStyle: { width: 26, height: 26, border: 'none', borderRadius: '50%', fontSize: 11.5, cursor: 'pointer', background: isSelected ? '#C97B5A' : 'transparent', color: isSelected ? '#fff' : theme.text, fontWeight: isSelected ? 700 : 400 },
+              });
+            }
+            return cells;
+          })(),
+          onLabel: e => this.setLineField(cfg.key, l.id, 'label', e.target.value),
+          onPrevu: e => this.setAmountDraft(draftKeyP, e.target.value),
+          onPrevuBlur: () => this.commitAmountDraft(draftKeyP, cfg.key, l.id, 'prevu'),
+          onReel: e => this.setAmountDraft(draftKeyR, e.target.value),
+          onReelBlur: () => this.commitAmountDraft(draftKeyR, cfg.key, l.id, 'reel'),
+          onTotal: e => this.setAmountDraft(draftKeyT, e.target.value),
+          onTotalBlur: () => this.commitAmountDraft(draftKeyT, cfg.key, l.id, 'total'),
+          onAmountEnter: e => { if (e.key === 'Enter') e.target.blur(); },
+          onRemove: () => this.removeLine(cfg.key, l.id),
+          ecartAmountFmt: (() => { const diff = (l.reel || 0) - (l.prevu || 0); return fmt(Math.abs(diff)); })(),
+          ecartUp: s.isSubscribed && (() => { const diff = (l.reel || 0) - (l.prevu || 0); if (diff === 0) return false; return cfg.direction === 1 ? diff > 0 : diff < 0; })(),
+          ecartDown: s.isSubscribed && (() => { const diff = (l.reel || 0) - (l.prevu || 0); if (diff === 0) return false; return cfg.direction === 1 ? diff < 0 : diff > 0; })(),
+          resteAtermeFmt: fmt(Math.max(0, (l.total || 0) - cumulativePaidByLabel(l.label || ''))),
+          resteAtermeStyle: { border: theme.inputBorder, borderRadius: 10, padding: '8px 4px', fontSize: 13, color: theme.text, background: theme.input, width: '100%', boxSizing: 'border-box', minWidth: 0, textAlign: 'right', fontWeight: 700 },
+          finPrevueFmt: (() => {
+            const reste = Math.max(0, (l.total || 0) - cumulativePaidByLabel(l.label || ''));
+            if (reste <= 0) return 'Soldé';
+            if (!l.prevu) return '—';
+            const monthsLeft = Math.ceil(reste / l.prevu);
+            let key = s.currentMonth;
+            for (let i = 0; i < monthsLeft - 1; i++) key = this.nextMonthKeyOf(key);
+            const [fy, fm] = key.split('-').map(Number);
+            return `${MONTHS_FR[fm - 1]} ${fy}`;
+          })(),
+          finPrevueStyle: { fontSize: 11.5, fontWeight: 700, color: '#fff', background: (Math.max(0, (l.total || 0) - cumulativePaidByLabel(l.label || '')) <= 0) ? SAGE : TERRACOTTA, borderRadius: 999, padding: '6px 4px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', textTransform: 'capitalize', letterSpacing: '0.01em', lineHeight: 1.15 },
+          lineEcartStyle: (() => {
+            const diff = (l.reel || 0) - (l.prevu || 0);
+            const good = diff === 0 ? null : (cfg.direction === 1 ? diff > 0 : diff < 0);
+            const color = good === null ? theme.text : (good ? TEXT_SAGE : TEXT_TERRACOTTA);
+            return { border: theme.inputBorder, borderRadius: 10, padding: '8px 4px', fontSize: 13, color, background: theme.input, width: '100%', boxSizing: 'border-box', minWidth: 0, textAlign: 'right', fontWeight: good ? 700 : 400, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 3 };
+          })(),
+          onMoveUp: s.isSubscribed ? (() => this.moveLine(cfg.key, l.id, -1)) : (() => this.openUpgrade()),
+          onMoveDown: s.isSubscribed ? (() => this.moveLine(cfg.key, l.id, 1)) : (() => this.openUpgrade()),
+          isFirst: s.isSubscribed ? isFirst : false,
+          isLast: s.isSubscribed ? isLast : false,
+          draggableLine: s.isSubscribed,
+          onDragStart: e => { if (!s.isSubscribed) { e.preventDefault(); this.openUpgrade(); return; } this._dragInfo = { catKey: cfg.key, id: l.id }; e.dataTransfer.effectAllowed = 'move'; this.forceUpdate(); },
+          onDragEnd: () => { this._dragInfo = null; this.forceUpdate(); },
+          onDragOver: e => e.preventDefault(),
+          onDrop: e => {
+            e.preventDefault();
+            if (this._dragInfo && this._dragInfo.catKey === cfg.key) this.reorderLine(cfg.key, this._dragInfo.id, l.id);
+            this._dragInfo = null;
+          },
+          moveUpStyle: { ...arrowBase, color: isFirst ? 'rgba(92,68,51,0.2)' : '#8a6a54', cursor: isFirst ? 'default' : 'pointer', transition: 'transform 0.15s ease' },
+          moveDownStyle: { ...arrowBase, color: isLast ? 'rgba(92,68,51,0.2)' : '#8a6a54', cursor: isLast ? 'default' : 'pointer', transition: 'transform 0.15s ease' },
+          moveUpHoverStyle: isFirst ? {} : { transform: 'scale(1.3)' },
+          moveDownHoverStyle: isLast ? {} : { transform: 'scale(1.3)' },
+          rowDragStyle: cfg.key === 'endettement'
+            ? { display: 'grid', gridTemplateColumns: '32px minmax(50px,1fr) minmax(0,70px) minmax(0,70px) minmax(0,70px) minmax(0,78px) 22px', gap: 6, alignItems: 'center', padding: '7px 4px', borderBottom: '1px solid rgba(92,68,51,0.06)', borderRadius: 8, opacity: isDragging ? 0.4 : 1, background: 'transparent' }
+            : { display: 'grid', gridTemplateColumns: '32px minmax(50px,1fr) 96px minmax(0,62px) minmax(0,62px) minmax(0,62px) 22px', gap: 6, alignItems: 'center', padding: '7px 4px', borderBottom: '1px solid rgba(92,68,51,0.06)', borderRadius: 8, opacity: isDragging ? 0.4 : 1, background: 'transparent' },
+        };
+      });
+      const isDeficitNow = (rawTotals.revenus || {}).reel < ((rawTotals.fixes || {}).reel || 0) + ((rawTotals.variables || {}).reel || 0);
+      const isDisabled = (cfg.key === 'epargne' || cfg.key === 'investissement' || cfg.key === 'endettement') && isDeficitNow;
+      const isPremiumLocked = !s.isSubscribed && (cfg.key === 'investissement' || cfg.key === 'endettement');
+      const isDebt = cfg.key === 'endettement';
+      const totalDebtAmt = isDebt ? rawLines.reduce((acc, l) => acc + (l.total || 0), 0) : 0;
+      const totalResteAmt = isDebt ? rawLines.reduce((acc, l) => acc + Math.max(0, (l.total || 0) - cumulativePaidByLabel(l.label || '')), 0) : 0;
+      return {
+        key: cfg.key, label: cfg.label, emptyText: cfg.emptyText, isCustom: !!cfg.custom,
+        onLabelChange: e => this.renameCustomCategory(cfg.key, e.target.value),
+        onRemoveCategory: () => this.removeCustomCategory(cfg.key),
+        lines, isEmpty: lines.length === 0, isDisabled, isDebt,
+        isPremiumLocked,
+        onUnlockClick: () => this.openUpgrade(),
+        totalDebtFmt: fmt(totalDebtAmt), totalResteFmt: fmt(totalResteAmt),
+        cardStyle: { position: 'relative', ...(isDisabled ? { ...baseCardStyle, opacity: 0.55, filter: 'grayscale(0.7)', pointerEvents: 'none' } : baseCardStyle), opacity: isDraggingCat ? 0.4 : (isDisabled ? 0.55 : 1) },
+        lockedBodyStyle: isPremiumLocked ? { filter: 'grayscale(0.8) blur(2px)', pointerEvents: 'none', opacity: 0.6 } : {},
+        isFirstCat: false, isLastCat: false,
+        onMoveCatUp: () => this.openUpgrade(),
+        onMoveCatDown: () => this.openUpgrade(),
+        onCatDragStart: e => { e.preventDefault(); },
+        onCatDragEnd: () => { this._catDragKey = null; this.forceUpdate(); },
+        onCatDragOver: e => e.preventDefault(),
+        onCatDrop: e => { e.preventDefault(); if (this._catDragKey) this.reorderCategory(this._catDragKey, cfg.key); this._catDragKey = null; },
+        catMoveUpStyle: { width: 15, height: 15, border: 'none', background: 'transparent', fontSize: 9, lineHeight: '15px', padding: 0, cursor: isFirstCat ? 'default' : 'pointer', color: isFirstCat ? 'rgba(92,68,51,0.2)' : theme.muted },
+        catMoveDownStyle: { width: 15, height: 15, border: 'none', background: 'transparent', fontSize: 9, lineHeight: '15px', padding: 0, cursor: isLastCat ? 'default' : 'pointer', color: isLastCat ? 'rgba(92,68,51,0.2)' : theme.muted },
+        totalPrevuFmt: fmt(totalPrevu), totalReelFmt: fmt(totalReel), ecartAmountFmt: fmt(Math.abs(ecart)), ecartUp: s.isSubscribed && good === true, ecartDown: s.isSubscribed && good === false,
+        ecartStyle: { color: good === null ? theme.muted : (good ? TEXT_SAGE : TEXT_TERRACOTTA), fontWeight: 700 },
+        totalRowStyle: cfg.key === 'endettement'
+          ? { display: 'grid', gridTemplateColumns: '32px minmax(50px,1fr) minmax(0,70px) minmax(0,70px) minmax(0,70px) minmax(0,78px) 22px', gap: 6, marginTop: 4, paddingTop: 8, borderTop: theme.mutedBorder, font: "700 13px 'Nunito',sans-serif", color: theme.text }
+          : { display: 'grid', gridTemplateColumns: '32px minmax(50px,1fr) 96px minmax(0,62px) minmax(0,62px) minmax(0,62px) 22px', gap: 6, marginTop: 4, paddingTop: 8, borderTop: theme.mutedBorder, font: "700 13px 'Nunito',sans-serif", color: theme.text },
+        ecartRowValueStyle: `color:${good === null ? theme.muted : (good ? TEXT_SAGE : TEXT_TERRACOTTA)}`,
+        catTitleInputStyle: { fontFamily: "'Quicksand',sans-serif", fontWeight: 700, fontSize: 16, color: theme.text, border: 'none', borderBottom: `1.5px dashed ${theme.muted}`, background: 'transparent', padding: '0 0 2px', outline: 'none', minWidth: 0, flex: 1 },
+        onAdd: () => this.addLine(cfg.key),
+        canAddLine: lineCap === Infinity || rawLinesFull.length < lineCap,
+        onAddOrUpgrade: (lineCap === Infinity || rawLinesFull.length < lineCap) ? () => this.addLine(cfg.key) : () => this.openUpgrade(),
+        onCopyNext: () => this.copySectionToNextMonth(cfg.key),
+        copyNextStyle: { marginTop: 10, border: `1.5px solid ${SAGE}`, background: 'transparent', color: TEXT_SAGE, font: "700 13px 'Nunito',sans-serif", borderRadius: 999, cursor: 'pointer', padding: '8px 16px' },
+        showTransfer: cfg.key === 'variables',
+        onTransfer: () => this.transferSectionToNextMonth(cfg.key, Math.max(0, -ecart)),
+        showFixVarTotal: cfg.key === 'variables' && s.isSubscribed,
+        fixVarTotalPrevuFmt: fmt((rawTotals.fixes || {}).prevu + totalPrevu),
+        fixVarTotalReelFmt: fmt((rawTotals.fixes || {}).reel + totalReel),
+        fixVarTotalStyle: { marginTop: 10, paddingTop: 10, borderTop: theme.mutedBorder, font: "700 12.5px 'Nunito',sans-serif", color: theme.text, textAlign: 'right' },
+        transferStyle: { marginTop: 10, border: `1.5px solid ${TERRACOTTA}`, background: 'transparent', color: TEXT_TERRACOTTA, font: "700 13px 'Nunito',sans-serif", borderRadius: 999, cursor: 'pointer', padding: '8px 16px' },
+      };
+    });
+
+    const resteAmount = rawTotals.revenus.reel - rawTotals.fixes.reel - rawTotals.variables.reel - rawTotals.epargne.reel - ((rawTotals.investissement || {}).reel || 0) - ((rawTotals.endettement || {}).prevu || 0) - s.customCategories.reduce((acc, c) => acc + ((rawTotals[c.key] || {}).reel || 0), 0);
+    const resteRowStyle = { marginTop: 6, paddingTop: 6, paddingRight: 28, font: "700 12.5px 'Nunito',sans-serif", color: resteAmount >= 0 ? TEXT_SAGE : TEXT_TERRACOTTA, textAlign: 'right' };
+    const resteFmt = signFmt(resteAmount);
+    const resteLabel = resteAmount < 0 ? 'Rien à répartir' : `Reste à répartir : ${resteFmt}`;
+    const resteLabelPrefix = resteAmount < 0 ? 'Rien à répartir' : 'Reste à répartir : ';
+    const resteLabelAmount = resteAmount < 0 ? '' : resteFmt;
+
+    const resultPrevu = rawTotals.revenus.prevu - (rawTotals.fixes.prevu + rawTotals.variables.prevu + rawTotals.epargne.prevu + ((rawTotals.investissement || {}).prevu || 0) + ((rawTotals.endettement || {}).prevu || 0) + s.customCategories.reduce((acc, c) => acc + ((rawTotals[c.key] || {}).prevu || 0), 0));
+    const resultReel = rawTotals.revenus.reel - (rawTotals.fixes.reel + rawTotals.variables.reel + rawTotals.epargne.reel + ((rawTotals.investissement || {}).reel || 0) + ((rawTotals.endettement || {}).prevu || 0) + s.customCategories.reduce((acc, c) => acc + ((rawTotals[c.key] || {}).reel || 0), 0));
+    const resultEcart = resultReel - resultPrevu;
+    const hasCoherenceNote = false;
+    const coherenceText = '';
+
+    const resultPositive = resultReel > 0;
+    const isDeficit = resultReel < 0;
+    const resultBg = resultPositive ? SAGE : TERRACOTTA;
+    const bannerBase = { borderRadius: 20, padding: '20px 22px', color: '#FFFFFF', background: resultBg, boxShadow: '0 4px 16px rgba(92,68,51,0.15)', animation: (isDeficit && s.isSubscribed) ? 'blinkAlert 1.1s ease-in-out infinite' : 'none' };
+    const resultBannerStyle = bannerBase;
+    const resultBannerStyleMobile = { ...bannerBase, textAlign: 'center' };
+    const bigNumberText = resultReel < 0 ? `-${fmt(Math.abs(resultReel))}` : fmt(resultReel);
+    const bigNumberLabel = resultPositive ? 'disponible après tout ce mois-ci' : 'de déficit ce mois-ci';
+
+    const view = s.view;
+    const base = view === 'reel' ? rawTotals.revenus.reel : rawTotals.revenus.prevu;
+    const fixedAmt = view === 'reel' ? rawTotals.fixes.reel : rawTotals.fixes.prevu;
+    const varAmt = view === 'reel' ? rawTotals.variables.reel : rawTotals.variables.prevu;
+    const saveAmt = base - fixedAmt - varAmt;
+    const pieHasData = base > 0;
+    let pieFixedPct = 0, pieVarPct = 0, pieSavePct = 0;
+    if (pieHasData) {
+      if (saveAmt < 0 && (fixedAmt + varAmt) > 0) {
+        pieFixedPct = Math.round((fixedAmt / (fixedAmt + varAmt)) * 100);
+        pieVarPct = 100 - pieFixedPct;
+        pieSavePct = 0;
+      } else {
+        pieFixedPct = Math.round((fixedAmt / base) * 100);
+        pieVarPct = Math.round((varAmt / base) * 100);
+        pieSavePct = Math.max(0, 100 - pieFixedPct - pieVarPct);
+      }
+    }
+    const RING_R = 52, RING_C = 2 * Math.PI * RING_R, DISPLAY_SCALE = 132 / 140;
+    const segConfigs = [
+      { pct: pieFixedPct, color: TERRACOTTA },
+      { pct: pieVarPct, color: TERRACOTTA_LIGHT },
+      { pct: pieSavePct, color: SAGE },
+    ];
+    let cumPct = 0;
+    const transitionStyle = { transition: 'stroke-dasharray 0.6s cubic-bezier(.4,0,.2,1), stroke-dashoffset 0.6s cubic-bezier(.4,0,.2,1)' };
+    const pieSegments = segConfigs.map(seg => {
+      const length = (seg.pct / 100) * RING_C;
+      const dasharray = `${length} ${RING_C - length}`;
+      const dashoffset = -((cumPct / 100) * RING_C);
+      cumPct += seg.pct;
+      return { color: seg.color, dasharray, dashoffset, transitionStyle };
+    });
+    cumPct = 0;
+    const pieLabels = segConfigs.filter(seg => seg.pct >= 6).map(seg => {
+      const midPct = cumPct + seg.pct / 2;
+      cumPct += seg.pct;
+      const angleRad = (midPct / 100) * 2 * Math.PI - Math.PI / 2;
+      const x = (70 + RING_R * Math.cos(angleRad)) * DISPLAY_SCALE;
+      const y = (70 + RING_R * Math.sin(angleRad)) * DISPLAY_SCALE;
+      return {
+        text: `${seg.pct}%`,
+        style: { position: 'absolute', left: `${x}px`, top: `${y}px`, transform: 'translate(-50%,-50%)', font: "800 10.5px 'Nunito',sans-serif", color: '#FFFFFF', textShadow: '0 1px 2px rgba(0,0,0,0.3)', pointerEvents: 'none', transition: 'left 0.6s cubic-bezier(.4,0,.2,1), top 0.6s cubic-bezier(.4,0,.2,1)' },
+      };
+    });
+    const pieCenterLabel = view === 'reel' ? 'Réel' : 'Prévu';
+    const pieCenterAmountFmt = fmt(base);
+
+    const rowFor = (label, prevu, reel, direction, highlight) => {
+      const ecart = reel - prevu;
+      const good = ecart === 0 ? null : (direction === 1 ? ecart > 0 : ecart < 0);
+      return {
+        label, prevuFmt: fmt(prevu), reelFmt: fmt(reel), ecartAmountFmt: fmt(Math.abs(ecart)), ecartUp: s.isSubscribed && good === true, ecartDown: s.isSubscribed && good === false,
+        rowStyle: { display: 'grid', gridTemplateColumns: '1.3fr 0.8fr 0.8fr 0.9fr', gap: 6, padding: '9px 0', borderBottom: '1px solid rgba(92,68,51,0.06)', background: highlight ? 'rgba(143,175,138,0.08)' : 'transparent', borderRadius: highlight ? 8 : 0 },
+        labelStyle: { font: `${highlight ? 700 : 600} 13px 'Nunito',sans-serif`, color: theme.text },
+        ecartStyle: { textAlign: 'right', font: "700 13px 'Nunito',sans-serif", color: good === null ? theme.muted : (good ? TEXT_SAGE : TEXT_TERRACOTTA), display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 3 },
+      };
+    };
+    const tableRows = [
+      rowFor("Rentrées d'argent", rawTotals.revenus.prevu, rawTotals.revenus.reel, 1),
+      rowFor('Dépenses fixes', rawTotals.fixes.prevu, rawTotals.fixes.reel, -1),
+      rowFor('Dépenses variables', rawTotals.variables.prevu, rawTotals.variables.reel, -1),
+      rowFor('Épargne mise de côté', rawTotals.epargne.prevu, rawTotals.epargne.reel, 1),
+      ...(s.isSubscribed ? [rowFor('Investissement', (rawTotals.investissement || {}).prevu || 0, (rawTotals.investissement || {}).reel || 0, 1)] : []),
+      ...(s.isSubscribed ? [rowFor("Suivi d'un endettement", (rawTotals.endettement || {}).prevu || 0, (rawTotals.endettement || {}).reel || 0, 1)] : []),
+      rowFor('Résultat (disponible réel)', resultPrevu, resultReel, 1, true),
+    ];
+
+    const nowKey = currentMonthKey();
+    const historyRows = Object.keys(s.months).filter(k => k >= s.signupMonth && k <= nowKey).sort().reverse().map(key => {
+      const md = s.months[key];
+      const sum = (arr) => (arr || []).reduce((acc, l) => acc + (l.reel || 0), 0);
+      const revenusReel = sum(md.revenus);
+      const depensesReel = sum(md.fixes) + sum(md.variables);
+      const resultM = revenusReel - depensesReel;
+      const [ky, km] = key.split('-').map(Number);
+      const good = resultM > 0;
+      const isExpanded = s.expandedHistoryMonth === key;
+      const detailCategories = CATS_CONFIG.map(cfg => {
+        const rawLines = md[cfg.key] || [];
+        const totalPrevu = rawLines.reduce((acc, l) => acc + (l.prevu || 0), 0);
+        const totalReel = rawLines.reduce((acc, l) => acc + (l.reel || 0), 0);
+        return {
+          label: cfg.label, isEmpty: rawLines.length === 0,
+          totalPrevuFmt: fmt(totalPrevu), totalReelFmt: fmt(totalReel),
+          sectionStyle: { marginBottom: 10 },
+          sectionTitleStyle: { display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', font: "700 12.5px 'Nunito',sans-serif", color: theme.text, marginBottom: 4 },
+          sectionTotalStyle: { font: "600 11.5px 'Nunito',sans-serif", color: theme.muted },
+          emptyLineStyle: { font: "400 12px 'Nunito',sans-serif", color: theme.muted, fontStyle: 'italic', padding: '2px 0' },
+          lines: rawLines.map(l => ({
+            label: l.label || '(sans nom)', prevuFmt: fmt(l.prevu), reelFmt: fmt(l.reel),
+            dateFmt: l.date ? (() => { const [dy, dm, dd] = l.date.split('-'); return `${dd}/${dm}/${dy}`; })() : '—',
+            lineRowStyle: { display: 'grid', gridTemplateColumns: '1.1fr 0.9fr 1fr 1fr', gap: 8, padding: '3px 0' },
+            labelStyle: { font: "400 12px 'Nunito',sans-serif", color: theme.muted },
+            dateStyle: { textAlign: 'right', font: "400 11.5px 'Nunito',sans-serif", color: theme.muted },
+            amountStyle: { textAlign: 'right', font: "500 12px 'Nunito',sans-serif", color: theme.text },
+          })),
+        };
+      });
+      const moodColor = (MOODS.find(m => m.key === s.diaryMoods[key]) || {}).color;
+      const epargneReel = sum(md.epargne);
+      const epargneColor = epargneReel > 200 ? '#8FAF8A' : (epargneReel > 0 ? '#C99A9A' : '#C97B5A');
+      return {
+        monthLabel: `${MONTHS_FR[km - 1]} ${ky}`,
+        revenusFmt: fmt(revenusReel), depensesFmt: fmt(depensesReel), resultFmt: signFmt(resultM),
+        rowStyle: { display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr', gap: 8, padding: '9px 0 9px 10px', borderBottom: isExpanded ? 'none' : theme.mutedBorder, cursor: 'pointer', borderLeft: `4px solid ${epargneColor}`, background: `color-mix(in srgb, ${epargneColor} 12%, transparent)`, borderRadius: 8 },
+        labelStyle: { font: "600 13px 'Nunito',sans-serif", color: theme.text, textTransform: 'capitalize' },
+        amountStyle: { textAlign: 'right', font: "600 13px 'Nunito',sans-serif", color: theme.text },
+        resultStyle: { textAlign: 'right', font: "700 13px 'Nunito',sans-serif", color: good ? TEXT_SAGE : TEXT_TERRACOTTA },
+        isExpanded, detailCategories,
+        onToggleDetail: () => this.toggleHistoryDetail(key),
+        chevron: isExpanded ? '▲' : '▼',
+        chevronStyle: { fontSize: 10, color: theme.muted },
+        detailBoxStyle: { background: theme.input, borderRadius: 12, padding: '10px 12px', marginBottom: 8 },
+      };
+    });
+
+    const segBtn = (active) => ({
+      flex: 1, border: 'none', borderRadius: 999, padding: '8px 0', cursor: 'pointer',
+      font: "700 13px 'Nunito',sans-serif", background: active ? theme.card : 'transparent',
+      color: active ? theme.text : theme.muted, boxShadow: active ? '0 1px 4px rgba(0,0,0,0.15)' : 'none',
+      transition: 'transform 0.15s ease, opacity 0.15s ease',
+    });
+    const segBtnHoverStyle = { transform: 'scale(1.03)', opacity: 0.85 };
+
+    const diaryHistoryRowsFull = Object.keys(s.diaryTexts).filter(k => s.diaryTexts[k] && s.diaryTexts[k].trim()).sort().reverse().map(key => {
+      const [dy, dm] = key.split('-').map(Number);
+      const mood = MOODS.find(m => m.key === s.diaryMoods[key]);
+      const text = s.diaryTexts[key] || '';
+      const isCurrent = key === s.currentMonth;
+      return {
+        monthLabel: `${MONTHS_FR[dm - 1]} ${dy}` + (isCurrent ? ' (en cours)' : ''),
+        snippet: text.length > 46 ? text.slice(0, 46) + '…' : text,
+        onOpen: () => this.viewDiaryMonth(key),
+        dotStyle: { width: 9, height: 9, borderRadius: '50%', background: mood ? mood.color : theme.muted, flexShrink: 0 },
+        rowStyle: { display: 'flex', alignItems: 'center', gap: 8, padding: '8px 10px', borderRadius: 10, background: isCurrent ? `color-mix(in srgb, #C97B5A 14%, ${theme.input})` : theme.input, cursor: 'pointer', border: isCurrent ? '1.5px solid #C97B5A' : '1.5px solid transparent' },
+        labelStyle: { font: "700 12px 'Nunito',sans-serif", color: theme.text, textTransform: 'capitalize', flexShrink: 0 },
+        snippetStyle: { font: "400 12px 'Nunito',sans-serif", color: theme.muted, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
+      };
+    });
+
+    return {
+      saveRowStyle: { display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 14 },
+      onSaveChanges: () => this.saveChangesNow(),
+      lockOverlayStyle: { position: 'absolute', inset: 0, zIndex: 5, cursor: 'pointer', pointerEvents: 'auto', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 20 },
+      lockOverlayInnerStyle: { background: 'rgba(92,68,51,0.85)', color: '#fff', font: "700 13px 'Nunito',sans-serif", padding: '12px 18px', borderRadius: 14, textAlign: 'center', maxWidth: '80%', transition: 'transform 0.15s ease, filter 0.15s ease, opacity 0.15s ease' },
+      canExport: true,
+      onExportClick: () => this.exportMonthToSheet(),
+      onSaveToNotes: () => this.saveResultToNotes(),
+      saveChangesBtnStyle: { border: `1.5px solid #7FAF78`, background: dm ? 'rgba(127,175,120,0.16)' : 'transparent', color: dm ? '#9FCB96' : '#5D7A56', font: "700 11.5px 'Nunito',sans-serif", borderRadius: 999, cursor: 'pointer', padding: '6px 12px' },
+      saveNotesBtnStyle: { border: `1.5px solid #E0906A`, background: dm ? 'rgba(224,144,106,0.16)' : 'transparent', color: dm ? '#F0AD8A' : '#C97B5A', font: "700 11.5px 'Nunito',sans-serif", borderRadius: 999, cursor: 'pointer', padding: '6px 12px' },
+      privacyOpen: s.privacyOpen,
+      togglePrivacy: () => this.togglePrivacy(),
+      onFooterPrivacyClick: e => { e.preventDefault(); this.togglePrivacy(); },
+      footerStyle: { textAlign: 'center', padding: '28px 0 8px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 },
+      footerLinkStyle: { font: "400 12px 'Nunito',sans-serif", color: theme.muted, textDecoration: 'underline' },
+      privacyModalStyle: { background: theme.card, borderRadius: 20, padding: '22px 24px', maxWidth: 460, width: '90%', maxHeight: '80vh', overflowY: 'auto', boxShadow: theme.cardShadow },
+      privacyTextStyle: { font: "400 13.5px 'Nunito',sans-serif", color: theme.text, lineHeight: 1.6, display: 'flex', flexDirection: 'column', gap: 10 },
+      privacyLinkStyle: { border: 'none', background: 'transparent', color: theme.muted, font: "600 12px 'Nunito',sans-serif", cursor: 'pointer', textDecoration: 'underline', display: 'block', width: '100%', textAlign: 'center', marginTop: 10, padding: 4 },
+      diaryOpen: s.diaryOpen,
+      toggleDiary: () => this.toggleDiary(),
+      onDiaryClick: () => this.onDiaryClick(),
+      diaryButtonLabel: s.isSubscribed ? '📔 Journal' : '🔒 Journal',
+      isViewingPastDiary: !!s.diaryViewKey,
+      diaryText: s.diaryTexts[s.currentMonth] || '',
+      onDiaryTextChange: e => this.onDiaryChange(e.target.value),
+      diaryViewLabel: (() => {
+        if (!s.diaryViewKey) return '';
+        const [vy, vm] = s.diaryViewKey.split('-').map(Number);
+        return `${MONTHS_FR[vm - 1]} ${vy}`;
+      })(),
+      diaryViewText: s.diaryViewKey ? (s.diaryTexts[s.diaryViewKey] || '') : '',
+      onCloseDiaryView: () => this.closeDiaryView(),
+      diaryModalStyle: { background: (MOODS.find(m => m.key === s.diaryMoods[s.currentMonth]) || {}).color ? `color-mix(in srgb, ${(MOODS.find(m => m.key === s.diaryMoods[s.currentMonth]) || {}).color} ${dm ? 22 : 14}%, ${theme.card})` : theme.card, borderRadius: 20, padding: '22px 24px', maxWidth: 480, width: '90%', maxHeight: '85vh', overflowY: 'auto', boxShadow: theme.cardShadow, display: 'flex', flexDirection: 'column', borderTop: `5px solid ${(MOODS.find(m => m.key === s.diaryMoods[s.currentMonth]) || {}).color || 'transparent'}` },
+      diarySubtitleStyle: { font: "500 12.5px 'Nunito',sans-serif", color: theme.muted, marginBottom: 12, textTransform: 'capitalize' },
+      diaryTextareaStyle: { border: theme.inputBorder, borderRadius: 14, padding: '14px 16px', fontSize: 14.5, lineHeight: 1.6, color: theme.text, background: theme.input, minHeight: 180, resize: 'vertical', fontFamily: "'Nunito',sans-serif", boxSizing: 'border-box' },
+      diaryViewBoxStyle: { border: theme.inputBorder, borderRadius: 14, padding: '14px 16px', fontSize: 14.5, lineHeight: 1.6, color: theme.text, background: theme.input, minHeight: 180, whiteSpace: 'pre-wrap', boxSizing: 'border-box' },
+      onSaveDiary: () => { this.save(); this.showToast('Note enregistrée', '#5D7A56'); },
+      saveDiaryRowStyle: { display: 'flex', justifyContent: 'flex-end', marginTop: 10, marginBottom: 4 },
+      saveDiaryBtnStyle: { border: `1.5px solid #5D7A56`, background: dm ? 'rgba(127,175,120,0.16)' : 'transparent', color: dm ? '#9FCB96' : '#5D7A56', font: "700 13px 'Nunito',sans-serif", borderRadius: 999, cursor: 'pointer', padding: '9px 16px' },
+      moodRowStyle: { display: 'flex', gap: 8, marginBottom: 12 },
+      moodOptions: MOODS.map(m => {
+        const selected = s.diaryMoods[s.currentMonth] === m.key;
+        return {
+          key: m.key, label: m.label,
+          onSelect: () => this.setDiaryMood(s.currentMonth, m.key),
+          swatchStyle: { flex: 1, border: selected ? `2px solid ${m.color}` : `1.5px solid ${m.color}`, background: selected ? m.color : 'transparent', color: selected ? '#fff' : m.color, font: "700 12.5px 'Nunito',sans-serif", borderRadius: 999, padding: '8px 4px', cursor: 'pointer' },
+          previewSwatchStyle: { flex: 1, border: `1.5px solid ${m.color}`, color: m.color, font: "700 12.5px 'Nunito',sans-serif", borderRadius: 999, padding: '8px 4px', textAlign: 'center' },
+        };
+      }),
+      hasDiaryHistory: Object.keys(s.diaryTexts).some(k => s.diaryTexts[k] && s.diaryTexts[k].trim()),
+      diaryHistoryTitleStyle: { font: "700 12px 'Nunito',sans-serif", color: theme.muted, textTransform: 'uppercase', letterSpacing: '0.04em', margin: '16px 0 8px' },
+      diaryHistoryListStyle: { display: 'flex', flexDirection: 'column', gap: 6 },
+      diaryHistoryRows: diaryHistoryRowsFull,
+      diarySearch: s.diarySearch,
+      onDiarySearchChange: e => this.setState({ diarySearch: e.target.value }),
+      diarySearchStyle: { border: theme.inputBorder, borderRadius: 10, padding: '8px 12px', fontSize: 12.5, color: theme.text, background: theme.input, width: '100%', boxSizing: 'border-box', marginBottom: 8 },
+      filteredDiaryHistoryRows: diaryHistoryRowsFull.filter(r => r.monthLabel.toLowerCase().includes(s.diarySearch.trim().toLowerCase())),
+      noDiarySearchResults: s.diarySearch.trim() !== '' && diaryHistoryRowsFull.filter(r => r.monthLabel.toLowerCase().includes(s.diarySearch.trim().toLowerCase())).length === 0,
+      addCustomCategory: () => this.addCustomCategory(),
+      addSectionButtonStyle: { marginTop: 4, border: `1.5px dashed ${TERRACOTTA}`, background: 'transparent', color: theme.dashText, font: "700 14px 'Nunito',sans-serif", borderRadius: 14, padding: '12px 16px', cursor: 'pointer', textAlign: 'center' },
+      toastVisible: s.toastVisible, toastText: s.toastText,
+      toastStyle: { position: 'fixed', left: '50%', bottom: 24, transform: `translateX(-50%) translateY(${s.toastVisible ? '0' : '20px'})`, opacity: s.toastVisible ? 1 : 0, pointerEvents: 'none', zIndex: 200, background: s.toastColor || TEXT_SAGE, color: '#fff', border: `1.5px solid ${s.toastColor || TEXT_SAGE}`, padding: '10px 18px', borderRadius: 999, font: "700 13px 'Nunito',sans-serif", boxShadow: '0 4px 14px rgba(0,0,0,0.15)', transition: 'opacity 0.25s ease, transform 0.25s ease', display: 'flex', alignItems: 'center', gap: 8 },
+      textColor: theme.text, mutedColor: theme.muted,
+      titleStyle: { font: "700 26px 'Quicksand',sans-serif", color: theme.text },
+      subtitleStyle: { font: "400 14px 'Nunito',sans-serif", color: theme.muted },
+      hasUserName: !!s.userName,
+      eyebrowStyle: { font: "700 11px 'Nunito',sans-serif", color: theme.muted, textTransform: 'uppercase', letterSpacing: '0.08em' },
+      greetingText: `Bonjour ${s.userName} !`,
+      greetingStyle: { font: "800 30px 'Quicksand',sans-serif", color: theme.text, margin: '2px 0 2px' },
+      onboardingStep: s.onboardingStep,
+      isStep0: s.onboardingStep === 0, isStep1: s.onboardingStep === 1, isStep2: s.onboardingStep === 2, isStep3: s.onboardingStep === 3, isStep4: s.onboardingStep === 4, isStep5: s.onboardingStep === 5,
+      goalOptions: ['Sortir du rouge', 'Épargner pour un projet', 'Comprendre mes dépenses', "Préparer un investissement"].map(label => ({
+        label, onPick: () => this.pickGoal(label),
+        style: { textAlign: 'left', border: s.goalInput === label ? `2px solid ${TERRACOTTA}` : theme.inputBorder, borderRadius: 14, padding: '13px 16px', background: s.goalInput === label ? 'rgba(201,123,90,0.12)' : theme.input, color: theme.text, font: "600 14px 'Nunito',sans-serif", cursor: 'pointer', transition: 'transform 0.15s ease' },
+      })),
+      situationProOptions: ['Salariée', 'Indépendante', 'Étudiante', 'Sans emploi / autre'].map(label => ({
+        label, onPick: () => this.pickSituationPro(label),
+        style: { textAlign: 'left', border: s.situationProInput === label ? `2px solid ${TERRACOTTA}` : theme.inputBorder, borderRadius: 14, padding: '13px 16px', background: s.situationProInput === label ? 'rgba(201,123,90,0.12)' : theme.input, color: theme.text, font: "600 14px 'Nunito',sans-serif", cursor: 'pointer', transition: 'transform 0.15s ease' },
+      })),
+      situationPersoOptions: ['Solo', 'En couple'].map(label => ({
+        label, onPick: () => this.pickSituationPerso(label),
+        style: { textAlign: 'left', border: s.situationPersoInput === label ? `2px solid ${TERRACOTTA}` : theme.inputBorder, borderRadius: 14, padding: '13px 16px', background: s.situationPersoInput === label ? 'rgba(201,123,90,0.12)' : theme.input, color: theme.text, font: "600 14px 'Nunito',sans-serif", cursor: 'pointer', transition: 'transform 0.15s ease' },
+      })),
+      hasKidsOptions: ['Avec enfants', 'Sans enfants'].map(label => ({
+        label, onPick: () => this.pickHasKids(label),
+        style: { textAlign: 'left', border: s.hasKidsInput === label ? `2px solid ${TERRACOTTA}` : theme.inputBorder, borderRadius: 14, padding: '13px 16px', background: s.hasKidsInput === label ? 'rgba(201,123,90,0.12)' : theme.input, color: theme.text, font: "600 14px 'Nunito',sans-serif", cursor: 'pointer', transition: 'transform 0.15s ease' },
+      })),
+      choiceListStyle: { display: 'flex', flexDirection: 'column', gap: 8 },
+      onboardingSubtitle: [
+        "Comment t'appelles-tu ?",
+        'Quel est ton objectif principal ?',
+        'Ta situation professionnelle ?',
+        'Ta situation personnelle ?',
+        'As-tu des enfants ?',
+        'Dernière étape : ton abonnement.',
+      ][s.onboardingStep],
+      onboardingDots: [0, 1, 2, 3, 4, 5].map(i => ({ style: { width: 8, height: 8, borderRadius: 999, background: i <= s.onboardingStep ? TERRACOTTA : 'rgba(150,130,115,0.3)' } })),
+      onboardingDotsWrapStyle: { display: 'flex', justifyContent: 'center', gap: 6, margin: '4px 0 22px' },
+      firstNameInput: s.firstNameInput, onFirstNameChange: e => this.setState({ firstNameInput: e.target.value }),
+      lastNameInput: s.lastNameInput, onLastNameChange: e => this.setState({ lastNameInput: e.target.value }),
+      emailInput: s.emailInput, onEmailChange: e => this.setState({ emailInput: e.target.value }),
+      professionInput: s.professionInput, onProfessionChange: e => this.setState({ professionInput: e.target.value }),
+      ageInput: s.ageInput, onAgeChange: e => this.setState({ ageInput: e.target.value }),
+      onboardingNext: () => this.onboardingNext(),
+      onOnboardingEnter: e => { if (e.key === 'Enter') this.onboardingNext(); },
+      onboardingBack: () => this.onboardingBack(),
+      onboardingNextLabel: s.onboardingStep < 5 ? 'Continuer' : "S'abonner et commencer",
+      gateNavRowStyle: { display: 'flex', alignItems: 'center', gap: 10, marginTop: 6 },
+      gateBackStyle: { border: 'none', background: 'transparent', color: theme.muted, font: "600 13px 'Nunito',sans-serif", cursor: 'pointer', padding: '12px 4px' },
+      paymentCardStyle: { background: theme.input, borderRadius: 16, padding: '20px 18px', marginBottom: 4 },
+      paymentPriceStyle: { font: "800 32px 'Quicksand',sans-serif", color: theme.text },
+      paymentPeriodStyle: { font: "600 14px 'Nunito',sans-serif", color: theme.muted },
+      paymentNoteStyle: { font: "400 13px 'Nunito',sans-serif", color: theme.muted, marginTop: 8 },
+      gateWrapStyle: { minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: theme.bg, padding: 20, boxSizing: 'border-box' },
+      gateCardStyle: { background: theme.card, borderRadius: 24, padding: '40px 36px', boxShadow: theme.cardShadow, border: theme.cardBorder, maxWidth: 360, width: '100%', textAlign: 'center' },
+      gateTitleStyle: { font: "800 26px 'Quicksand',sans-serif", color: theme.text, marginBottom: 8 },
+      gateSubtitleStyle: { fontFamily: "'Montserrat',sans-serif", fontWeight: 300, fontSize: 18, color: theme.text, marginBottom: 4 },
+      gateFormStyle: { display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 18 },
+      gateInputStyle: { border: theme.inputBorder, borderRadius: 12, padding: '12px 14px', fontSize: 15, color: theme.text, background: theme.input, textAlign: 'center', boxSizing: 'border-box' },
+      gateSubmitStyle: { flex: 1, border: 'none', borderRadius: 999, padding: '12px 14px', fontSize: 14, fontWeight: 700, background: TERRACOTTA, color: '#FFFFFF', cursor: 'pointer', transition: 'transform 0.15s ease, opacity 0.15s ease' },
+      gateSubmitHoverStyle: { transform: 'scale(1.04)', opacity: 0.9 },
+      resetOnboarding: () => this.resetOnboarding(),
+      onResetOnboardingClick: e => { e.preventDefault(); this.resetOnboarding(); },
+      toggleHistory: () => this.toggleHistory(),
+      onHistoryClick: () => this.onHistoryClick(),
+      historyButtonLabel: s.isSubscribed ? 'Historique' : '🔒 Historique',
+      onSimulationClick: () => this.onSimulationClick(),
+      isSubscribed: s.isSubscribed,
+      upgradeOpen: s.upgradeOpen,
+      openUpgrade: () => this.openUpgrade(),
+      closeUpgrade: () => this.closeUpgrade(),
+      subscribeNow: () => this.subscribeNow(),
+      skipToFree: () => this.skipToFree(),
+      gateFreeLinkStyle: { border: 'none', background: 'transparent', color: theme.muted, font: "600 13px 'Nunito',sans-serif", cursor: 'pointer', textDecoration: 'underline', display: 'block', width: '100%', textAlign: 'center', marginTop: 12, padding: 6 },
+      upgradeModalStyle: { background: theme.card, borderRadius: 20, padding: '24px 22px', width: 'min(90vw,380px)', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: 12 },
+      historyOpen: s.historyOpen,
+      historyButtonStyle: { border: 'none', borderRadius: 999, padding: '10px 16px', background: theme.card, color: theme.text, font: "700 13px 'Nunito',sans-serif", cursor: 'pointer', boxShadow: theme.cardShadow, transition: 'transform 0.15s ease, opacity 0.15s ease' },
+      historyButtonHoverStyle: { transform: 'scale(1.05)', opacity: 0.8 },
+      stopPropagation: e => e.stopPropagation(),
+      upgradeBackdropStyle: { position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', zIndex: 70, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20, boxSizing: 'border-box' },
+      historyBackdropStyle: { position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', zIndex: 60, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20, boxSizing: 'border-box' },
+      historyModalStyle: { background: theme.card, borderRadius: 20, padding: '22px 24px', maxWidth: 520, width: '100%', maxHeight: '80vh', overflowY: 'auto', boxShadow: '0 12px 40px rgba(0,0,0,0.3)' },
+      historyTitleStyle: { font: "800 20px 'Quicksand',sans-serif", color: theme.text },
+      historyHeaderRowStyle: { display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr', gap: 8, font: "700 11px 'Nunito',sans-serif", color: theme.muted, textTransform: 'uppercase', letterSpacing: '0.03em', paddingBottom: 8, borderBottom: theme.mutedBorder },
+      hasHistoryRows: historyRows.length > 0,
+      historyRows,
+      historySearch: s.historySearch,
+      onHistorySearchChange: e => this.setState({ historySearch: e.target.value }),
+      yearCalendarOpen: s.yearCalendarOpen,
+      onOpenYearCalendar: () => this.openYearCalendar(),
+      onCloseYearCalendar: () => this.closeYearCalendar(),
+      onYearCalPrev: () => this.shiftYearCal(-1),
+      onYearCalNext: () => this.shiftYearCal(1),
+      yearCalLabel: String(s.yearCalYear || currentMonthKey().split('-')[0]),
+      yearCalOpenBtnStyle: { display: 'flex', alignItems: 'center', gap: 6, border: 'none', borderRadius: 999, padding: '9px 14px', background: '#C97B5A', color: '#fff', font: "700 12.5px 'Nunito',sans-serif", cursor: 'pointer', boxShadow: '0 3px 10px rgba(201,123,90,0.3)', transition: 'transform 0.15s ease, background 0.15s ease' },
+      yearCalCloseBtnStyle: { width: 34, height: 34, borderRadius: 999, border: '2px solid #C97B5A', background: theme.card, color: '#C97B5A', fontSize: 15, fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' },
+      yearCalModalStyle: { background: theme.card, borderRadius: 20, padding: '22px 24px', width: '92vw', maxWidth: 980, maxHeight: '86vh', overflowY: 'auto', boxShadow: '0 20px 60px rgba(0,0,0,0.3)' },
+      yearCalGridStyle: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 18, alignItems: 'stretch' },
+      yearCalCardStyle: { display: 'flex', flexDirection: 'column', height: '100%', gap: 6 },
+      yearCalWeekdaysStyle: { display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', fontSize: 9.5, color: theme.muted, textAlign: 'center', marginBottom: 2 },
+      yearCalDaysGridStyle: { display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: 2, justifyItems: 'center' },
+      selectedDaySpendStyle: { marginTop: 16, background: dm ? 'rgba(201,123,90,0.15)' : 'rgba(201,123,90,0.1)', borderRadius: 12, padding: '12px 16px' },
+      selectedDaySpendTitleStyle: { font: "700 14px 'Nunito',sans-serif", color: TEXT_TERRACOTTA, marginBottom: 6 },
+      selectedDaySpendItemStyle: { display: 'flex', justifyContent: 'space-between', font: "500 13px 'Nunito',sans-serif", color: theme.text, padding: '2px 0' },
+      selectedDaySpendEmptyStyle: { font: "500 13px 'Nunito',sans-serif", color: theme.muted },
+      hasSelectedDay: !!s.selectedDayKey,
+      selectedDayTitle: (() => {
+        if (!s.selectedDayKey) return '';
+        const { total } = this.spentOnDay(s.selectedDayKey);
+        const [dy, dm2, dd] = s.selectedDayKey.split('-');
+        return `${dd}/${dm2}/${dy} — dépensé ce jour-là : ${fmt(total)}`;
+      })(),
+      selectedDayHasItems: s.selectedDayKey ? this.spentOnDay(s.selectedDayKey).items.length > 0 : false,
+      selectedDayItems: s.selectedDayKey ? this.spentOnDay(s.selectedDayKey).items.map(it => ({ label: it.label, amountFmt: fmt(it.amount) })) : [],
+      yearCalMonths: (() => {
+        const year = s.yearCalYear || Number(currentMonthKey().split('-')[0]);
+        return Array.from({ length: 12 }, (_, mi) => {
+          const monthNum = mi + 1;
+          const firstDay = new Date(year, mi, 1);
+          const startOffset = (firstDay.getDay() + 6) % 7;
+          const daysInMonth = new Date(year, mi + 1, 0).getDate();
+          const days = [];
+          for (let i = 0; i < startOffset; i++) days.push({ label: '', dayStyle: { visibility: 'hidden', width: 22, height: 22 }, onSelect: () => {} });
+          for (let d = 1; d <= daysInMonth; d++) {
+            const dateStr = `${year}-${String(monthNum).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+            const spent = this.spentOnDay(dateStr).total;
+            const isSelected = s.selectedDayKey === dateStr;
+            days.push({
+              label: String(d),
+              onSelect: () => this.selectCalDay(dateStr),
+              dayStyle: {
+                width: 22, height: 22, border: 'none', borderRadius: '50%', fontSize: 10, cursor: 'pointer',
+                background: isSelected ? '#C97B5A' : (spent > 0 ? 'rgba(201,123,90,0.25)' : 'transparent'),
+                color: isSelected ? '#fff' : theme.text, fontWeight: spent > 0 ? 700 : 400,
+              },
+            });
+          }
+          return { label: MONTHS_FR[mi], monthLabelStyle: { font: "700 13px 'Quicksand',sans-serif", color: theme.text, marginBottom: 4, textTransform: 'capitalize' }, days, ...this.monthCalSummary(year, monthNum) };
+        });
+      })(),
+      historySearchWrapStyle: { position: 'relative', marginBottom: 14 },
+      historySearchIconStyle: { position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: '#C97B5A', pointerEvents: 'none', display: 'flex' },
+      historySearchStyle: { border: `2px solid #C97B5A`, borderRadius: 999, padding: '12px 16px 12px 42px', fontSize: 14, fontWeight: 600, color: theme.text, background: theme.input, width: '100%', boxSizing: 'border-box', boxShadow: '0 3px 10px rgba(201,123,90,0.18)', marginBottom: 12 },
+      filteredHistoryRows: historyRows.filter(hr => hr.monthLabel.toLowerCase().includes(s.historySearch.trim().toLowerCase())),
+      noSearchResults: s.historySearch.trim() !== '' && historyRows.filter(hr => hr.monthLabel.toLowerCase().includes(s.historySearch.trim().toLowerCase())).length === 0,
+      monthNavStyle: { display: 'flex', alignItems: 'center', gap: 10, background: s.currentMonth === currentMonthKey() ? SAGE : theme.card, borderRadius: 999, padding: '6px 8px', boxShadow: theme.cardShadow },
+      navBtnStyle: { width: 34, height: 34, borderRadius: 999, border: 'none', background: s.currentMonth === currentMonthKey() ? 'rgba(255,255,255,0.3)' : theme.navBg, color: s.currentMonth === currentMonthKey() ? '#FFFFFF' : theme.navColor, fontSize: 16, cursor: 'pointer', transition: 'transform 0.15s ease, opacity 0.15s ease' },
+      navBtnHoverStyle: { transform: 'scale(1.15)', opacity: 0.8 },
+      monthLabelStyle: { font: "700 15px 'Quicksand',sans-serif", color: s.currentMonth === currentMonthKey() ? '#FFFFFF' : theme.text, minWidth: 150, textAlign: 'center', textTransform: 'capitalize' },
+      toggleDarkMode: () => this.toggleDarkMode(),
+      darkToggleStyle: { width: 38, height: 38, border: 'none', borderRadius: 999, background: theme.card, color: theme.text, fontSize: 16, cursor: 'pointer', boxShadow: theme.cardShadow, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0, transition: 'transform 0.15s ease, opacity 0.15s ease' },
+      darkToggleHoverStyle: { transform: 'scale(1.15)', opacity: 0.8 },
+      darkToggleLabel: dm ? '☀' : '☾',
+      onMicClick: () => this.onMicClick(),
+      micListening: s.micListening,
+      micButtonStyle: { width: 38, height: 38, border: 'none', borderRadius: 999, background: s.micListening ? '#B35F3D' : theme.card, color: s.micListening ? '#fff' : theme.text, fontSize: 16, cursor: 'pointer', boxShadow: theme.cardShadow, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0, transition: 'transform 0.15s ease, opacity 0.15s ease', animation: s.micListening ? 'blinkAlert 1s ease-in-out infinite' : 'none' },
+
+      disabledNoteStyle: { font: "600 12.5px 'Nunito',sans-serif", color: TEXT_TERRACOTTA, marginTop: 4, fontStyle: 'italic' },
+      emptyTextStyle: { textAlign: 'center', padding: '18px 8px', color: theme.muted, font: "400 14px 'Nunito',sans-serif", fontStyle: 'italic' },
+      debtColHeaderStyle: { display: 'grid', gridTemplateColumns: '32px minmax(50px,1fr) minmax(0,70px) minmax(0,70px) minmax(0,70px) minmax(0,78px) 22px', gap: 6, padding: '0 0 6px', font: "700 11px 'Nunito',sans-serif", color: theme.muted, textTransform: 'uppercase', letterSpacing: '0.03em' },
+      colHeaderStyle: { display: 'grid', gridTemplateColumns: '32px minmax(50px,1fr) 96px minmax(0,62px) minmax(0,62px) minmax(0,62px) 22px', gap: 6, padding: '0 0 6px', font: "700 11px 'Nunito',sans-serif", color: theme.muted, textTransform: 'uppercase', letterSpacing: '0.03em' },
+      dateInputStyle: { border: theme.inputBorder, borderRadius: 10, padding: '8px 4px', fontSize: 12, color: theme.text, background: theme.input, boxSizing: 'border-box', width: '100%', cursor: 'pointer', textAlign: 'center', fontFamily: "'Nunito',sans-serif" },
+      calendarPopoverStyle: { position: 'absolute', top: '100%', left: 0, marginTop: 4, zIndex: 30, background: theme.card, border: theme.cardBorder, borderRadius: 14, boxShadow: '0 8px 24px rgba(92,68,51,0.25)', padding: 10, width: 200 },
+      calendarHeaderStyle: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 },
+      calendarNavBtnStyle: { border: 'none', background: 'transparent', fontSize: 14, cursor: 'pointer', color: theme.text, padding: '2px 8px' },
+      calendarMonthLabelStyle: { font: "700 12px 'Nunito',sans-serif", color: theme.text, textTransform: 'capitalize' },
+      calendarWeekdaysStyle: { display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', fontSize: 10, color: theme.muted, textAlign: 'center', marginBottom: 2 },
+      calendarGridStyle: { display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: 2, justifyItems: 'center' },
+      dragDotStyle: { fontSize: 13, color: theme.dragDot, letterSpacing: '-1px', lineHeight: 1 },
+      labelInputStyle: { border: theme.inputBorder, borderRadius: 10, padding: '8px 10px', fontSize: 14, color: theme.text, background: theme.input, minWidth: 0 },
+      amountInputStyle: { border: theme.inputBorder, borderRadius: 10, padding: '8px 4px', fontSize: 13, color: theme.text, background: theme.input, width: '100%', boxSizing: 'border-box', minWidth: 0, textAlign: 'right' },
+      addLineButtonStyle: { marginTop: 10, border: `1.5px dashed ${TERRACOTTA}`, background: 'transparent', color: theme.dashText, font: "600 13px 'Nunito',sans-serif", borderRadius: 999, padding: '8px 16px', cursor: 'pointer', transition: 'transform 0.15s ease, opacity 0.15s ease, background 0.15s ease' },
+      addLineButtonHoverStyle: { transform: 'scale(1.04)', background: 'rgba(201,123,90,0.1)' },
+      removeButtonStyle: { width: 22, height: 22, borderRadius: 999, border: 'none', background: 'transparent', color: '#C97B5A', fontSize: 15, cursor: 'pointer', lineHeight: 1, padding: 0, transition: 'transform 0.15s ease, opacity 0.15s ease, background 0.15s ease' },
+      removeButtonHoverStyle: { transform: 'scale(1.25)', background: 'rgba(201,123,90,0.15)' },
+      sidebarCardStyle: { background: theme.card, borderRadius: 20, padding: '16px 18px', boxShadow: theme.cardShadow, border: theme.cardBorder },
+      segWrapStyle: { display: 'flex', justifyContent: 'center', gap: 4, background: theme.segWrap, borderRadius: 999, padding: 4, marginBottom: 16 },
+      pieRingBaseColor: theme.segWrap,
+      pieCenterLabelStyle: { font: "700 9px 'Nunito',sans-serif", color: theme.muted, textTransform: 'uppercase' },
+      pieCenterAmountStyle: { font: "800 15px 'Quicksand',sans-serif", color: theme.text },
+      legendTextStyle: { display: 'flex', flexDirection: 'column', gap: 8, font: "600 13px 'Nunito',sans-serif", color: theme.text },
+      placeholderTextStyle: { textAlign: 'center', padding: '20px 8px', color: theme.muted, font: "400 13px 'Nunito',sans-serif", fontStyle: 'italic' },
+      coherenceStyle: { background: '#E8C4B0', borderRadius: 16, padding: '14px 16px', font: "600 13px 'Nunito',sans-serif", color: '#5C4433' },
+      tableHeaderStyle: { display: 'grid', gridTemplateColumns: '1.3fr 0.8fr 0.8fr 0.9fr', gap: 6, font: "700 11px 'Nunito',sans-serif", color: theme.muted, textTransform: 'uppercase', letterSpacing: '0.03em', paddingBottom: 8, borderBottom: theme.mutedBorder },
+      amountTextStyle: { textAlign: 'right', font: "600 13px 'Nunito',sans-serif", color: theme.text },
+      resteRowStyle, resteFmt, resteLabel, resteLabelPrefix, resteLabelAmount,
+      resteLockedStyle: { marginTop: 6, paddingTop: 6, textAlign: 'right', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 6 },
+      resteLabelStyle: { font: "700 12.5px 'Nunito',sans-serif", color: theme.muted },
+      resteBlurStyle: { font: "700 12.5px 'Nunito',sans-serif", color: theme.muted, filter: 'blur(4px)', userSelect: 'none' },
+      resteLockIconStyle: { fontSize: 12 },
+      copyNextBlurredStyle: { marginTop: 10, border: `1.5px solid ${SAGE}`, background: 'transparent', color: TEXT_SAGE, font: "700 13px 'Nunito',sans-serif", borderRadius: 999, cursor: 'pointer', padding: '8px 16px', filter: 'blur(3px)', opacity: 0.6 },
+      nextMonthLabel: (() => { const nk = this.nextMonthKeyOf(s.currentMonth); const [ny, nm] = nk.split('-').map(Number); return `${MONTHS_FR[nm - 1]} ${ny}`; })(),
+      monthLabel, categoriesData, tableRows,
+      isMobile,
+      showFirstLaunchBanner: false,
+      layoutStyle: { flexDirection: isMobile ? 'column' : 'row' },
+      bottomPad: isMobile ? 90 : 0,
+      prevMonth: () => this.shiftMonth(-1),
+      nextMonth: () => this.shiftMonth(1),
+      setViewPrevu: () => this.setState({ view: 'prevu' }),
+      setViewReel: () => this.setState({ view: 'reel' }),
+      viewPrevuBtnStyle: segBtn(view === 'prevu'),
+      viewReelBtnStyle: segBtn(view === 'reel'),
+      segBtnHoverStyle,
+      pieHasData, pieSegments, pieLabels, pieCenterLabel, pieCenterAmountFmt, pieFixedPct, pieVarPct, pieSavePct,
+      pieLocked: !s.isSubscribed,
+      pieShowChart: s.isSubscribed && pieHasData,
+      pieShowEmpty: s.isSubscribed && !pieHasData,
+      lockedPlaceholderStyle: { textAlign: 'center', padding: '10px 8px 4px', color: TEXT_TERRACOTTA, font: "700 13px 'Nunito',sans-serif", cursor: 'pointer' },
+      piePreviewWrapStyle: { display: 'flex', alignItems: 'center', gap: 18, justifyContent: 'center', filter: 'blur(4px)', opacity: 0.55, userSelect: 'none', pointerEvents: 'none' },
+      lockPreviewWrapStyle: { filter: 'blur(3px)', opacity: 0.55, userSelect: 'none', pointerEvents: 'none' },
+      historyPreviewRowStyle: { display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr', gap: 8, padding: '9px 0', font: "600 13px 'Nunito',sans-serif", color: theme.text, borderBottom: theme.mutedBorder },
+      pieFixedAmtFmt: fmt(fixedAmt), pieVarAmtFmt: fmt(varAmt), pieSaveAmtFmt: fmt(Math.max(0, saveAmt)),
+      hasCoherenceNote, coherenceText,
+      breakdownFixesFmt: fmt(rawTotals.fixes.reel), breakdownVarFmt: fmt(rawTotals.variables.reel), breakdownEpargneFmt: fmt(rawTotals.epargne.reel), isDeficit, resultPositive,
+      bravoStyle: { marginTop: 20, textAlign: 'center', font: "700 16px 'Quicksand',sans-serif", color: TEXT_SAGE },
+      encourageStyle: { marginTop: 20, textAlign: 'center', font: "600 15px 'Nunito',sans-serif", color: TEXT_TERRACOTTA },
+      encourageText: DEFICIT_QUOTES[[...s.currentMonth].reduce((a, c) => a + c.charCodeAt(0), 0) % DEFICIT_QUOTES.length],
+      bravoText: BRAVO_QUOTES[[...s.currentMonth].reduce((a, c) => a + c.charCodeAt(0), 0) % BRAVO_QUOTES.length],
+      splashVisible: s.splashVisible, splashQuote: s.splashQuote,
+      splashOverlayStyle: { position: 'fixed', inset: 0, zIndex: 100, background: dm ? 'rgba(48,47,46,0.72)' : 'rgba(244,237,228,0.72)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 40, boxSizing: 'border-box', opacity: s.splashFading ? 0 : 1, pointerEvents: s.splashFading ? 'none' : 'auto', transition: 'opacity 0.6s ease' },
+      splashQuoteStyle: { fontFamily: "'Montserrat',sans-serif", fontWeight: 300, fontSize: 'clamp(20px,4vw,30px)', color: theme.text, maxWidth: 640, textAlign: 'center', lineHeight: 1.5 },
+      splashWordStyle: { fontWeight: 700, textDecoration: 'underline' },
+      simulationStyle: { marginTop: 24, borderRadius: 20, padding: '22px 26px', background: resultPositive ? SAGE : (isDeficit ? '#D6604D' : TERRACOTTA), color: '#FFFFFF', boxShadow: '0 4px 16px rgba(92,68,51,0.15)', animation: isDeficit ? 'blinkAlert 1.1s ease-in-out infinite' : 'none', cursor: 'pointer', transition: 'transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease' },
+      simulationBigText: resultReel > 0 ? `+ ${fmt(resultReel * 12)}` : `− ${fmt(Math.abs(resultReel * 12))}`,
+      simulationPreviewStyle: { font: "800 clamp(24px,4.5vw,36px) 'Quicksand',sans-serif", marginTop: 6, lineHeight: 1.15, filter: 'blur(4px)', opacity: 0.6, userSelect: 'none' },
+      simulationSubText: resultReel > 0
+        ? `En épargnant ${fmt(resultReel)} chaque mois comme ce mois-ci, c'est ce que tu auras mis de côté dans 12 mois.`
+        : `Au rythme de ce mois-ci (${signFmt(resultReel)}/mois), ton solde reculerait d'autant sur 12 mois.`,
+      resultBannerStyle, resultBannerStyleMobile, bigNumberText, bigNumberLabel,
+      toggleExpanded: () => this.setState(st => ({ resultsExpanded: !st.resultsExpanded })),
+      stickyBarStyle: {
+        position: 'fixed', left: 0, right: 0, bottom: 0, zIndex: 40,
+        background: resultBg, color: '#FFFFFF', padding: '14px 20px',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        boxShadow: '0 -4px 16px rgba(92,68,51,0.2)', cursor: 'pointer',
+      },
+      overlayStyle: {
+        position: 'fixed', left: 0, right: 0, bottom: 0, top: '12vh', zIndex: 50,
+        background: theme.bg, borderRadius: '24px 24px 0 0', boxShadow: '0 -8px 30px rgba(0,0,0,0.2)',
+        display: 'flex', flexDirection: 'column',
+        transform: s.resultsExpanded ? 'translateY(0)' : 'translateY(110%)',
+        transition: 'transform 0.32s ease',
+      },
+    };
+  }
+}
+
+</script>
+</body>
+</html>
